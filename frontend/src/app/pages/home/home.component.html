@@ -1,0 +1,71 @@
+<div class="min-h-screen">
+  <!-- Hero Section -->
+  <section class="bg-paytomic-cream py-20">
+    <div class="max-w-4xl mx-auto px-8 text-center">
+      <h1 class="text-5xl font-bold text-paytomic-dark mb-6">
+        Få betalt hurtigere med automatiske fakturapåmindelser
+      </h1>
+      <p class="text-xl text-paytomic-slate mb-8 max-w-2xl mx-auto">
+        Paytomic hjælper danske SMV'er med at spare tid og få betalt hurtigere ved at automatisere professionel opfølgning på ubetalte fakturaer.
+      </p>
+      <a [href]="'mailto:' + email">
+        <button nz-button nzType="primary" nzSize="large" class="px-8">
+          Kom i gang
+        </button>
+      </a>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-8">
+      <h2 class="text-3xl font-bold text-paytomic-dark mb-6 text-center">Problemet</h2>
+      <p class="text-lg text-paytomic-slate mb-4">
+        Mange danske SMV'er kæmper med at holde styr på ubetalte fakturaer. Det er tidskrævende at huske hvornår man skal følge op, og det er svært at skrive påmindelser der er både professionelle og effektive.
+      </p>
+      <p class="text-lg text-paytomic-slate">
+        Resultatet er spildt tid, forsinkede betalinger og akavede kundesamtaler.
+      </p>
+    </div>
+  </section>
+
+  <!-- Solution Section -->
+  <section class="py-16 bg-paytomic-cream">
+    <div class="max-w-4xl mx-auto px-8">
+      <h2 class="text-3xl font-bold text-paytomic-dark mb-6 text-center">Løsningen</h2>
+      <p class="text-lg text-paytomic-slate mb-8 text-center">
+        Paytomic automatiserer professionel opfølgning på ubetalte fakturaer. Vi integrerer med dit bogføringssystem for at holde styr på forfaldne fakturaer, sender påmindelser automatisk, og stopper når fakturaen er betalt.
+      </p>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-8">
+      <h2 class="text-3xl font-bold text-paytomic-dark mb-12 text-center">Hvorfor Paytomic?</h2>
+      <div nz-row [nzGutter]="[24, 24]">
+        <div nz-col [nzXs]="24" [nzMd]="8" *ngFor="let feature of features">
+          <nz-card [nzTitle]="feature.title" class="h-full">
+            <p class="text-paytomic-slate">{{ feature.description }}</p>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-paytomic-dark">
+    <div class="max-w-4xl mx-auto px-8 text-center">
+      <h2 class="text-3xl font-bold text-paytomic-cream mb-6">Klar til at komme i gang?</h2>
+      <p class="text-lg text-paytomic-cream mb-8">
+        Kontakt os i dag for at høre mere om hvordan Paytomic kan hjælpe din virksomhed.
+      </p>
+      <a [href]="'mailto:' + email">
+        <button nz-button nzType="default" nzSize="large" class="px-8">
+          Kontakt os
+        </button>
+      </a>
+    </div>
+  </section>
+</div>
+

@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+
+@theme {
+  --color-paytomic-cream: #F2F4E8;
+  --color-paytomic-dark: #2D3C45;
+  --color-paytomic-slate: #415764;
+}
