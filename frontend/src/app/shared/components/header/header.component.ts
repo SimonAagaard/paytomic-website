@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzAffixModule } from 'ng-zorro-antd/affix';
@@ -11,6 +11,7 @@ import { NzAffixModule } from 'ng-zorro-antd/affix';
   imports: [
     CommonModule,
     RouterLink,
+    RouterLinkActive,
     NzLayoutModule,
     NzMenuModule,
     NzAffixModule

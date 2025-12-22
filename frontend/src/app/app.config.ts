@@ -6,6 +6,24 @@ import { da_DK, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import da from '@angular/common/locales/da';
 import { provideNzIcons } from 'ng-zorro-antd/icon';
+import {
+  UserAddOutline,
+  PlayCircleOutline,
+  ClockCircleOutline,
+  RiseOutline,
+  RobotOutline,
+  LinkOutline,
+  SettingOutline,
+  CheckCircleOutline,
+  MailOutline,
+  ApiOutline,
+  SafetyOutline,
+  FundOutline,
+  DashboardOutline,
+  MessageOutline,
+  ArrowRightOutline,
+  RocketOutline
+} from '@ant-design/icons-angular/icons';
 
 import { routes } from './app.routes';
 
@@ -18,6 +36,23 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideHttpClient(),
     provideNzI18n(da_DK),
-    provideNzIcons([])
+    provideNzIcons([
+      UserAddOutline,
+      PlayCircleOutline,
+      ClockCircleOutline,
+      RiseOutline,
+      RobotOutline,
+      LinkOutline,
+      SettingOutline,
+      CheckCircleOutline,
+      MailOutline,
+      ApiOutline,
+      SafetyOutline,
+      FundOutline,
+      DashboardOutline,
+      MessageOutline,
+      ArrowRightOutline,
+      RocketOutline
+    ])
   ]
 };

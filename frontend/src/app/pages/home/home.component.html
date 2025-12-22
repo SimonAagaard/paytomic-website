@@ -1,71 +1,207 @@
 <div class="min-h-screen">
   <!-- Hero Section -->
-  <section class="bg-paytomic-cream py-20">
-    <div class="max-w-4xl mx-auto px-8 text-center">
-      <h1 class="text-5xl font-bold text-paytomic-dark mb-6">
-        Få betalt hurtigere med automatiske fakturapåmindelser
-      </h1>
-      <p class="text-xl text-paytomic-slate mb-8 max-w-2xl mx-auto">
-        Paytomic hjælper danske SMV'er med at spare tid og få betalt hurtigere ved at automatisere professionel opfølgning på ubetalte fakturaer.
-      </p>
-      <a [href]="'mailto:' + email">
-        <button nz-button nzType="primary" nzSize="large" class="px-8">
-          Kom i gang
-        </button>
-      </a>
+  <section class="hero-section relative overflow-hidden py-20 md:py-32">
+    <div class="max-w-7xl mx-auto px-8">
+      <div nz-row [nzGutter]="[48, 48]" nzAlign="middle">
+        <div nz-col [nzXs]="24" [nzMd]="12">
+          <div class="hero-badge mb-6">
+            <span class="px-4 py-2 bg-paytomic-slate/10 rounded-full text-paytomic-slate font-semibold text-sm inline-block">
+              Nu tilgængelig i early access
+            </span>
+          </div>
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-paytomic-dark mb-6 leading-tight">
+            Stop med at jage<br/>ubetalte fakturaer
+          </h1>
+          <p class="text-xl md:text-2xl text-paytomic-slate mb-8 leading-relaxed">
+            Paytomic sender automatisk professionelle påmindelser, så du får betaling hurtigere og kan fokusere på at drive din virksomhed.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 mb-8">
+            <a [href]="'mailto:' + email">
+              <button nz-button nzType="primary" nzSize="large" class="px-10 py-6 text-lg h-auto hero-cta">
+                <span nz-icon nzType="user-add" nzTheme="outline" class="mr-2"></span>
+                Tilmeld dig early access
+              </button>
+            </a>
+            <a routerLink="/how-it-works">
+              <button nz-button nzType="default" nzSize="large" class="px-10 py-6 text-lg h-auto">
+                <span nz-icon nzType="play-circle" nzTheme="outline" class="mr-2"></span>
+                Se hvordan det virker
+              </button>
+            </a>
+          </div>
+
+          <div class="flex items-center gap-6 text-sm text-paytomic-slate">
+            <div class="flex items-center gap-2">
+              <span nz-icon nzType="check-circle" nzTheme="fill" class="text-green-500"></span>
+              <span>Gratis early access</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span nz-icon nzType="check-circle" nzTheme="fill" class="text-green-500"></span>
+              <span>Ingen kreditkort</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span nz-icon nzType="check-circle" nzTheme="fill" class="text-green-500"></span>
+              <span>Opsæt på 10 min</span>
+            </div>
+          </div>
+        </div>
+        
+        <div nz-col [nzXs]="24" [nzMd]="12">
+          <div class="hero-image-wrapper">
+            <img src="assets/images/landing_hero.svg" alt="Paytomic Dashboard" class="w-full h-auto">
+          </div>
+        </div>
+      </div>
     </div>
+    
+    <div class="hero-bg-gradient"></div>
   </section>
 
-  <!-- Problem Section -->
-  <section class="py-16 bg-white">
-    <div class="max-w-4xl mx-auto px-8">
-      <h2 class="text-3xl font-bold text-paytomic-dark mb-6 text-center">Problemet</h2>
-      <p class="text-lg text-paytomic-slate mb-4">
-        Mange danske SMV'er kæmper med at holde styr på ubetalte fakturaer. Det er tidskrævende at huske hvornår man skal følge op, og det er svært at skrive påmindelser der er både professionelle og effektive.
-      </p>
-      <p class="text-lg text-paytomic-slate">
-        Resultatet er spildt tid, forsinkede betalinger og akavede kundesamtaler.
-      </p>
-    </div>
-  </section>
-
-  <!-- Solution Section -->
-  <section class="py-16 bg-paytomic-cream">
-    <div class="max-w-4xl mx-auto px-8">
-      <h2 class="text-3xl font-bold text-paytomic-dark mb-6 text-center">Løsningen</h2>
-      <p class="text-lg text-paytomic-slate mb-8 text-center">
-        Paytomic automatiserer professionel opfølgning på ubetalte fakturaer. Vi integrerer med dit bogføringssystem for at holde styr på forfaldne fakturaer, sender påmindelser automatisk, og stopper når fakturaen er betalt.
-      </p>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="py-16 bg-white">
+  <!-- Analysis Section -->
+  <section class="py-20 bg-white">
     <div class="max-w-6xl mx-auto px-8">
-      <h2 class="text-3xl font-bold text-paytomic-dark mb-12 text-center">Hvorfor Paytomic?</h2>
-      <div nz-row [nzGutter]="[24, 24]">
-        <div nz-col [nzXs]="24" [nzMd]="8" *ngFor="let feature of features">
-          <nz-card [nzTitle]="feature.title" class="h-full">
-            <p class="text-paytomic-slate">{{ feature.description }}</p>
+      <div nz-row [nzGutter]="[48, 48]" nzAlign="middle">
+        <div nz-col [nzXs]="24" [nzMd]="12">
+          <img src="assets/images/landing_checklist.svg" alt="Paytomic Analysis" class="w-full h-auto">
+        </div>
+        <div nz-col [nzXs]="24" [nzMd]="12">
+          <div class="space-y-6">
+            <nz-card class="analysis-card">
+              <h3 class="text-xl font-bold text-paytomic-dark mb-3">Automatisk opfølgning</h3>
+              <p class="text-paytomic-slate">
+                Paytomic holder automatisk styr på dine ubetalte fakturaer og sender påmindelser på det rigtige tidspunkt.
+              </p>
+            </nz-card>
+            <nz-card class="analysis-card">
+              <h3 class="text-xl font-bold text-paytomic-dark mb-3">Intelligent timing</h3>
+              <p class="text-paytomic-slate">
+                Vores system analyserer betalingsmønstre og optimerer tidspunktet for påmindelser for bedre resultater.
+              </p>
+            </nz-card>
+            <nz-card class="analysis-card">
+              <h3 class="text-xl font-bold text-paytomic-dark mb-3">Fuld kontrol</h3>
+              <p class="text-paytomic-slate">
+                Du bestemmer selv reglerne. Tilpas påmindelser, tidsintervaller og kommunikation efter dine behov.
+              </p>
+            </nz-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-8">
+      <h2 class="text-4xl font-bold text-paytomic-dark mb-4 text-center">Sådan virker det</h2>
+      <p class="text-xl text-paytomic-slate mb-24 text-center max-w-2xl mx-auto">
+        Kom i gang på få minutter med vores simple trin-for-trin proces
+      </p>
+      <div nz-row [nzGutter]="[32, 32]" class="mt-12 py-12">
+        <div nz-col [nzXs]="24" [nzMd]="8" *ngFor="let step of howItWorks; let i = index">
+          <div class="how-it-works-card text-center">
+            <div class="step-number">{{ step.number }}</div>
+            <h3 class="text-2xl font-bold text-paytomic-dark mb-4">{{ step.title }}</h3>
+            <p class="text-lg text-paytomic-slate">{{ step.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Features Section -->
+  <section class="py-20 bg-paytomic-cream">
+    <div class="max-w-6xl mx-auto px-8">
+      <h2 class="text-4xl font-bold text-paytomic-dark mb-4 text-center">Hold styr på alt på ét sted</h2>
+      <p class="text-xl text-paytomic-slate mb-16 text-center max-w-2xl mx-auto">
+        Få fuldt overblik over dine fakturaer og betalinger med vores intuitive dashboard
+      </p>
+      <div nz-row [nzGutter]="[32, 32]">
+        <div nz-col [nzXs]="24" [nzMd]="8">
+          <nz-card class="h-full dashboard-card">
+            <img src="assets/images/landing_dashboard_1.svg" alt="Dashboard Overview" class="w-full h-48 object-contain mb-4">
+            <h3 class="text-xl font-bold text-paytomic-dark mb-3 text-center">Overblik i realtid</h3>
+            <p class="text-paytomic-slate text-center">
+              Se status på alle dine fakturaer med ét klik. Få øjeblikkeligt overblik over hvad der er betalt, udestående og forsinket.
+            </p>
+          </nz-card>
+        </div>
+        <div nz-col [nzXs]="24" [nzMd]="8">
+          <nz-card class="h-full dashboard-card">
+            <img src="assets/images/landing_dashboard_2.svg" alt="Analytics" class="w-full h-48 object-contain mb-4">
+            <h3 class="text-xl font-bold text-paytomic-dark mb-3 text-center">Dybdegående analyse</h3>
+            <p class="text-paytomic-slate text-center">
+              Forstå dine debitors betalingsmønstre med detaljerede rapporter og visualiseringer af din cashflow.
+            </p>
+          </nz-card>
+        </div>
+        <div nz-col [nzXs]="24" [nzMd]="8">
+          <nz-card class="h-full dashboard-card">
+            <img src="assets/images/landing_dashboard_3.svg" alt="Automation" class="w-full h-48 object-contain mb-4">
+            <h3 class="text-xl font-bold text-paytomic-dark mb-3 text-center">Smart automatisering</h3>
+            <p class="text-paytomic-slate text-center">
+              Automatiske påmindelser sendes på det perfekte tidspunkt baseret på dine regler og kundehistorik.
+            </p>
           </nz-card>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Section -->
-  <section class="py-20 bg-paytomic-dark">
+  <!-- Features Section -->
+  <section class="py-20 bg-paytomic-cream">
+    <div class="max-w-6xl mx-auto px-8">
+      <h2 class="text-4xl font-bold text-paytomic-dark mb-4 text-center">Hvorfor Paytomic?</h2>
+      <p class="text-xl text-paytomic-slate mb-16 text-center max-w-2xl mx-auto">
+        Alt du behøver for at få styr på dine ubetalte fakturaer
+      </p>
+      <div nz-row [nzGutter]="[24, 24]">
+        <div nz-col [nzXs]="24" [nzMd]="12" [nzLg]="8" *ngFor="let feature of features">
+          <nz-card class="h-full feature-card hover:shadow-lg transition-shadow">
+            <div class="flex flex-col items-center text-center">
+              <span nz-icon [nzType]="feature.icon" nzTheme="outline" class="text-4xl text-paytomic-slate mb-4"></span>
+              <h3 class="text-xl font-bold text-paytomic-dark mb-3">{{ feature.title }}</h3>
+              <p class="text-paytomic-slate">{{ feature.description }}</p>
+            </div>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-8">
+      <h2 class="text-4xl font-bold text-paytomic-dark mb-4 text-center">Ofte stillede spørgsmål</h2>
+      <p class="text-xl text-paytomic-slate mb-12 text-center">
+        Har du spørgsmål? Vi har svarene
+      </p>
+      <nz-collapse>
+        <nz-collapse-panel *ngFor="let faq of faqs" [nzHeader]="faq.question" [nzActive]="faq.active">
+          <p class="text-paytomic-slate text-lg">{{ faq.answer }}</p>
+        </nz-collapse-panel>
+      </nz-collapse>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="py-24 bg-paytomic-dark">
     <div class="max-w-4xl mx-auto px-8 text-center">
-      <h2 class="text-3xl font-bold text-paytomic-cream mb-6">Klar til at komme i gang?</h2>
-      <p class="text-lg text-paytomic-cream mb-8">
-        Kontakt os i dag for at høre mere om hvordan Paytomic kan hjælpe din virksomhed.
+      <h2 class="text-4xl font-bold text-paytomic-cream mb-6">Klar til at komme i gang?</h2>
+      <p class="text-xl text-paytomic-cream mb-10 max-w-2xl mx-auto">
+        Tilmeld dig vores early access program og vær blandt de første til at bruge Paytomic.
       </p>
       <a [href]="'mailto:' + email">
-        <button nz-button nzType="default" nzSize="large" class="px-8">
-          Kontakt os
+        <button nz-button nzType="primary" nzSize="large" class="px-12 py-6 text-lg h-auto">
+          <span nz-icon nzType="user-add" nzTheme="outline" class="mr-2"></span>
+          Tilmeld dig early access
         </button>
       </a>
+      <p class="text-paytomic-cream mt-8">
+        Har du spørgsmål? 
+        <a routerLink="/contact" class="text-paytomic-cream underline hover:opacity-80 ml-1">Kontakt os</a>
+      </p>
     </div>
   </section>
 </div>
-

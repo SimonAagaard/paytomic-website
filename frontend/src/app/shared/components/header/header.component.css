@@ -1,5 +1,57 @@
 /* Header component styles */
 nz-header {
-  height: 64px;
-  line-height: 64px;
+  height: 80px;
+  line-height: 80px;
+}
+
+/* Ensure ng-zorro menu styles work properly */
+::ng-deep .ant-menu-dark {
+  background: transparent !important;
+}
+
+::ng-deep .ant-menu-dark .ant-menu-item {
+  color: #F2F4E8;
+  margin: 0 8px;
+  padding: 0 !important;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  background-color: transparent !important;
+  height: 80px !important;
+  line-height: 80px !important;
+}
+
+::ng-deep .ant-menu-dark .ant-menu-item a {
+  color: #F2F4E8;
+  font-size: 16px;
+  padding: 6px 12px !important;
+  display: inline-block;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+::ng-deep .ant-menu-dark .ant-menu-item:hover a {
+  box-shadow: 0 0 0 3px rgba(242, 244, 232, 0.4);
+  transform: translateY(-1px);
+}
+
+::ng-deep .ant-menu-dark .ant-menu-item-selected a {
+  box-shadow: 0 0 0 3px #F2F4E8;
+}
+
+::ng-deep .ant-menu-dark .ant-menu-item:hover {
+  color: #F2F4E8;
+  background-color: transparent !important;
+}
+
+::ng-deep .ant-menu-dark .ant-menu-item-selected {
+  color: #F2F4E8;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-bottom: none;
+}
+
+::ng-deep .ant-menu-dark .ant-menu-item::after {
+  border-bottom: none !important;
 }

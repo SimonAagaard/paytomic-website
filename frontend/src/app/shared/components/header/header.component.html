@@ -1,27 +1,29 @@
 <nz-affix [nzOffsetTop]="0">
-  <nz-header class="bg-paytomic-dark px-8 flex items-center justify-between">
-    <div class="flex items-center">
-      <a routerLink="/" class="text-paytomic-cream text-2xl font-bold no-underline hover:text-paytomic-cream">
-        Paytomic
-      </a>
+  <nz-header class="!bg-paytomic-dark px-8">
+    <div class="flex items-center justify-between h-full">
+      <div class="flex items-center">
+        <a routerLink="/" class="flex items-center no-underline hover:opacity-90 transition-opacity">
+          <img src="assets/images/with_padding.png" alt="Paytomic" class="h-20">
+        </a>
+      </div>
+      
+      <ul nz-menu 
+          nzMode="horizontal" 
+          nzTheme="dark"
+          class="!bg-transparent !border-0 flex-1 justify-end">
+        <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/about">Om</a>
+        </li>
+        <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/how-it-works">Hvordan virker det?</a>
+        </li>
+        <!-- <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/pricing">Priser</a>
+        </li> -->
+        <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/contact">Kontakt</a>
+        </li>
+      </ul>
     </div>
-    
-    <ul nz-menu 
-        nzMode="horizontal" 
-        nzTheme="dark"
-        class="bg-paytomic-dark border-0 flex-1 justify-end">
-      <li nz-menu-item>
-        <a routerLink="/about" class="text-paytomic-cream hover:text-paytomic-cream">Om</a>
-      </li>
-      <li nz-menu-item>
-        <a routerLink="/how-it-works" class="text-paytomic-cream hover:text-paytomic-cream">Hvordan virker det?</a>
-      </li>
-      <li nz-menu-item>
-        <a routerLink="/pricing" class="text-paytomic-cream hover:text-paytomic-cream">Priser</a>
-      </li>
-      <li nz-menu-item>
-        <a routerLink="/contact" class="text-paytomic-cream hover:text-paytomic-cream">Kontakt</a>
-      </li>
-    </ul>
   </nz-header>
 </nz-affix>
