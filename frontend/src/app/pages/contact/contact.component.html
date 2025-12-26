@@ -1,7 +1,109 @@
-<div class="min-h-screen p-8">
-  <h1 class="text-3xl font-bold">Kontakt</h1>
-  <p class="mt-4">
-    Kontakt os på: 
-    <a href="mailto:hello@paytomic.dk" class="text-paytomic-slate hover:underline">hello@paytomic.dk</a>
-  </p>
+<div class="min-h-screen py-16 px-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <h1 class="text-5xl font-bold text-paytomic-dark mb-4">Kontakt os</h1>
+      <p class="text-xl text-paytomic-slate">Vi er klar til at hjælpe dig - udfyld formularen nedenfor</p>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8">
+      <nz-steps [nzCurrent]="currentStep" class="mb-8">
+        <nz-step nzTitle="Henvendelse"></nz-step>
+        <nz-step nzTitle="Dine oplysninger"></nz-step>
+        <nz-step nzTitle="Færdig"></nz-step>
+      </nz-steps>
+
+      <form nz-form [formGroup]="contactForm" [nzLayout]="'vertical'">
+        <!-- Step 1: Initial Inquiry -->
+        <div *ngIf="currentStep === 0">
+          <nz-form-item>
+            <nz-form-label nzRequired>Email</nz-form-label>
+            <nz-form-control [nzErrorTip]="contactForm.get('email')?.dirty && contactForm.get('email')?.invalid ? 'Indtast venligst en gyldig email' : ''">
+              <input nz-input formControlName="email" placeholder="din@email.dk" type="email" class="text-lg py-3" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label nzRequired>Hvad drejer din henvendelse sig om?</nz-form-label>
+            <nz-form-control [nzErrorTip]="contactForm.get('inquiryType')?.dirty && contactForm.get('inquiryType')?.invalid ? 'Vælg venligst en kategori' : ''">
+              <nz-select formControlName="inquiryType" nzPlaceHolder="Vælg kategori" class="w-full" nzSize="large">
+                <nz-option *ngFor="let type of inquiryTypes" [nzValue]="type.value" [nzLabel]="type.label"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+
+          <div class="flex justify-end mt-8">
+            <button nz-button nzType="primary" nzSize="large" (click)="nextStep()" class="px-8">
+              Næste
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Details -->
+        <div *ngIf="currentStep === 1">
+          <nz-form-item>
+            <nz-form-label nzRequired>Navn</nz-form-label>
+            <nz-form-control [nzErrorTip]="contactForm.get('name')?.dirty && contactForm.get('name')?.invalid ? 'Indtast venligst dit navn' : ''">
+              <input nz-input formControlName="name" placeholder="Dit navn" class="text-lg py-3" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label nzRequired>Virksomhedsnavn</nz-form-label>
+            <nz-form-control [nzErrorTip]="contactForm.get('companyName')?.dirty && contactForm.get('companyName')?.invalid ? 'Indtast venligst virksomhedsnavn' : ''">
+              <input nz-input formControlName="companyName" placeholder="Din virksomhed" class="text-lg py-3" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label>Telefonnummer (valgfrit)</nz-form-label>
+            <nz-form-control>
+              <input nz-input formControlName="phone" placeholder="+45 12 34 56 78" class="text-lg py-3" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <!-- Honeypot field - hidden from humans, bots will fill it -->
+          <div class="hidden" aria-hidden="true">
+            <input type="text" formControlName="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <nz-form-item>
+            <nz-form-label nzRequired>Besked</nz-form-label>
+            <nz-form-control [nzErrorTip]="contactForm.get('message')?.dirty && contactForm.get('message')?.invalid ? 'Indtast venligst en besked' : ''">
+              <textarea nz-input formControlName="message" placeholder="Skriv din besked her..." [nzAutosize]="{ minRows: 6, maxRows: 10 }" class="text-lg"></textarea>
+            </nz-form-control>
+          </nz-form-item>
+
+          <div class="flex justify-between mt-8">
+            <button nz-button nzSize="large" (click)="prevStep()" class="px-8">
+              Tilbage
+            </button>
+            <button nz-button nzType="primary" nzSize="large" (click)="submitForm()" class="px-8">
+              Send besked
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Confirmation -->
+        <div *ngIf="currentStep === 2" class="text-center py-12">
+          <div class="mb-6">
+            <span nz-icon nzType="check-circle" nzTheme="fill" class="text-6xl text-paytomic-sage"></span>
+          </div>
+          <h2 class="text-3xl font-bold text-paytomic-dark mb-4">Tak for din henvendelse!</h2>
+          <p class="text-xl text-paytomic-slate mb-8">
+            Vi har modtaget din besked og vender tilbage hurtigst muligt.
+          </p>
+          <button nz-button nzType="default" nzSize="large" (click)="currentStep = 0; contactForm.reset()" class="px-8">
+            Send ny besked
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="mt-8 text-center">
+      <p class="text-paytomic-slate">
+        Eller skriv direkte til: 
+        <a href="mailto:hello@paytomic.dk" class="text-paytomic-sage hover:underline font-semibold">hello@paytomic.dk</a>
+      </p>
+    </div>
+  </div>
 </div>

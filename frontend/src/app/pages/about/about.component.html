@@ -1,3 +1,75 @@
-<div class="min-h-screen p-8">
-  <h1 class="text-3xl font-bold">Om Paytomic</h1>
+<div class="min-h-screen py-16 px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h1 class="text-5xl font-bold text-paytomic-dark mb-4">Om Paytomic</h1>
+      <p class="text-xl text-paytomic-slate">Vores rejse mod at gøre fakturapåmindelser enkle og effektive</p>
+    </div>
+
+    <div nz-row [nzGutter]="[48, 48]">
+      <!-- Timeline Section -->
+      <div nz-col [nzXs]="24" [nzLg]="14">
+        <h2 class="text-3xl font-bold text-paytomic-dark mb-6">Vores rejse og hvor vi skal hen</h2>
+        <nz-timeline>
+        @for (milestone of milestones; track milestone.date + milestone.title) {
+          <nz-timeline-item 
+            [nzColor]="milestone.isPast ? 'green' : '#415764'"
+            [nzDot]="milestone.inProgress ? loadingDot : undefined">
+            <ng-template #loadingDot>
+              <div class="custom-spinner"></div>
+            </ng-template>
+            <div class="timeline-content" [class.future-milestone]="!milestone.isPast" [class.in-progress]="milestone.inProgress">
+              <div class="flex items-start gap-4">
+                <div class="flex-1">
+                  <div class="text-sm font-semibold" [class.text-green-600]="milestone.isPast" [class.text-paytomic-slate]="!milestone.isPast">
+                    {{ milestone.date }}
+                  </div>
+                  <h3 class="text-xl font-bold text-paytomic-dark mt-1 mb-2">
+                    {{ milestone.title }}
+                    @if (milestone.inProgress) {
+                      <span class="text-sm font-normal text-paytomic-slate ml-2">(I gang)</span>
+                    }
+                  </h3>
+                  <p class="text-paytomic-slate">{{ milestone.description }}</p>
+                </div>
+              </div>
+            </div>
+          </nz-timeline-item>
+        }
+      </nz-timeline>
+      </div>
+
+      <!-- Founders Section -->
+      <div nz-col [nzXs]="24" [nzLg]="10">
+        <div class="sticky top-8">
+          <h2 class="text-3xl font-bold text-paytomic-dark mb-6">Personen bag</h2>
+          
+          @for (founder of founders; track founder.name) {
+            <nz-card class="founder-card mb-6">
+              <div class="flex flex-col items-center text-center">
+                <div class="founder-image-wrapper mb-4">
+                  <img [src]="founder.image" [alt]="founder.name" class="founder-image">
+                </div>
+                <h3 class="text-2xl font-bold text-paytomic-dark mb-1">{{ founder.name }}</h3>
+                <p class="text-sm text-paytomic-slate mb-4 font-semibold">{{ founder.role }}</p>
+                <p class="text-paytomic-slate leading-relaxed">{{ founder.bio }}</p>
+                @if (founder.linkedin) {
+                  <a [href]="founder.linkedin" target="_blank" rel="noopener noreferrer" class="mt-4 text-paytomic-slate hover:text-paytomic-dark transition-colors">
+                    <span nz-icon nzType="linkedin" nzTheme="fill" class="text-2xl"></span>
+                  </a>
+                }
+              </div>
+            </nz-card>
+          }
+
+          <!-- Mission Statement -->
+          <nz-card class="mission-card">
+            <h3 class="text-xl font-bold text-paytomic-dark mb-3">Vores Mission</h3>
+            <p class="text-paytomic-slate leading-relaxed">
+              At gøre fakturapåmindelser og rykkere så enkle og effektive, at danske virksomheder kan fokusere på det, de er bedst til – at drive forretning.
+            </p>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

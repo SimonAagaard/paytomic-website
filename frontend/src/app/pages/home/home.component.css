@@ -21,15 +21,16 @@
 }
 
 .hero-cta {
-  background: linear-gradient(135deg, #2D3C45 0%, #415764 100%);
+  background: #8FA99B !important;
   border: none;
-  box-shadow: 0 4px 14px 0 rgba(45, 60, 69, 0.25);
+  box-shadow: 0 4px 14px 0 rgba(143, 169, 155, 0.3);
   transition: all 0.3s ease;
 }
 
 .hero-cta:hover {
+  background: #7A9388 !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px 0 rgba(45, 60, 69, 0.35);
+  box-shadow: 0 6px 20px 0 rgba(143, 169, 155, 0.4);
 }
 
 .hero-image-wrapper {
@@ -64,7 +65,7 @@
 }
 
 .analysis-card {
-  border-left: 4px solid #415764;
+  border-left: 4px solid #8FA99B;
   transition: all 0.3s ease;
 }
 
@@ -109,7 +110,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #415764;
+  background: #8FA99B;
   color: #F2F4E8;
   display: flex;
   align-items: center;
@@ -125,8 +126,9 @@
 }
 
 .feature-card:hover {
-  border-color: #415764;
+  border-color: #8FA99B;
   transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(143, 169, 155, 0.2);
 }
 
 .testimonial-card {

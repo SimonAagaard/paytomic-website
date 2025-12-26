@@ -30,10 +30,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/terms/terms.component').then(m => m.TermsComponent)
   },
   {
-    path: 'test-zorro',
-    loadComponent: () => import('./pages/test-zorro/test-zorro.component').then(m => m.TestZorroComponent)
-  },
-  {
     path: '**',
     redirectTo: ''
   }

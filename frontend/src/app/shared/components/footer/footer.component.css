@@ -1,1 +1,20 @@
 /* Footer component styles */
+/* Override global link colors for footer */
+nz-footer a {
+  color: rgba(242, 244, 232, 0.8) !important;
+}
+
+nz-footer a:hover {
+  color: rgba(242, 244, 232, 1) !important;
+}
+
+nz-footer .text-paytomic-cream\/60 a {
+  color: rgba(242, 244, 232, 0.6) !important;
+}
+/* Override global heading colors for footer */
+nz-footer h4 {
+  color: rgba(242, 244, 232, 1) !important;
+}
+nz-footer .text-paytomic-cream\/60 a:hover {
+  color: rgba(242, 244, 232, 0.8) !important;
+}

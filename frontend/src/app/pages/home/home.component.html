@@ -1,6 +1,6 @@
 <div class="min-h-screen">
   <!-- Hero Section -->
-  <section class="hero-section relative overflow-hidden py-20 md:py-32">
+  <section class="hero-section relative overflow-hidden py-16 md:py-24">
     <div class="max-w-7xl mx-auto px-8">
       <div nz-row [nzGutter]="[48, 48]" nzAlign="middle">
         <div nz-col [nzXs]="24" [nzMd]="12">
@@ -13,7 +13,7 @@
             Stop med at jage<br/>ubetalte fakturaer
           </h1>
           <p class="text-xl md:text-2xl text-paytomic-slate mb-8 leading-relaxed">
-            Paytomic sender automatisk professionelle påmindelser, så du får betaling hurtigere og kan fokusere på at drive din virksomhed.
+            Paytomic sender automatisk professionelle påmindelser til dine debitorer, så du får betaling hurtigere og kan fokusere på at drive din virksomhed.
           </p>
           
           <div class="flex flex-col sm:flex-row gap-4 mb-8">
@@ -33,15 +33,15 @@
 
           <div class="flex items-center gap-6 text-sm text-paytomic-slate">
             <div class="flex items-center gap-2">
-              <span nz-icon nzType="check-circle" nzTheme="fill" class="text-green-500"></span>
+              <span nz-icon nzType="check-circle" nzTheme="fill" class="text-paytomic-sage"></span>
               <span>Gratis early access</span>
             </div>
             <div class="flex items-center gap-2">
-              <span nz-icon nzType="check-circle" nzTheme="fill" class="text-green-500"></span>
+              <span nz-icon nzType="check-circle" nzTheme="fill" class="text-paytomic-sage"></span>
               <span>Ingen kreditkort</span>
             </div>
             <div class="flex items-center gap-2">
-              <span nz-icon nzType="check-circle" nzTheme="fill" class="text-green-500"></span>
+              <span nz-icon nzType="check-circle" nzTheme="fill" class="text-paytomic-sage"></span>
               <span>Opsæt på 10 min</span>
             </div>
           </div>
@@ -121,7 +121,7 @@
         <div nz-col [nzXs]="24" [nzMd]="8">
           <nz-card class="h-full dashboard-card">
             <img src="assets/images/landing_dashboard_1.svg" alt="Dashboard Overview" class="w-full h-48 object-contain mb-4">
-            <h3 class="text-xl font-bold text-paytomic-dark mb-3 text-center">Overblik i realtid</h3>
+            <h3 class="text-xl font-bold text-paytomic-dark mb-3 text-center border-b-2 border-paytomic-sage pb-2">Overblik i realtid</h3>
             <p class="text-paytomic-slate text-center">
               Se status på alle dine fakturaer med ét klik. Få øjeblikkeligt overblik over hvad der er betalt, udestående og forsinket.
             </p>
@@ -130,7 +130,7 @@
         <div nz-col [nzXs]="24" [nzMd]="8">
           <nz-card class="h-full dashboard-card">
             <img src="assets/images/landing_dashboard_2.svg" alt="Analytics" class="w-full h-48 object-contain mb-4">
-            <h3 class="text-xl font-bold text-paytomic-dark mb-3 text-center">Dybdegående analyse</h3>
+            <h3 class="text-xl font-bold text-paytomic-dark mb-3 text-center border-b-2 border-paytomic-sage pb-2">Dybdegående analyse</h3>
             <p class="text-paytomic-slate text-center">
               Forstå dine debitors betalingsmønstre med detaljerede rapporter og visualiseringer af din cashflow.
             </p>
@@ -139,7 +139,7 @@
         <div nz-col [nzXs]="24" [nzMd]="8">
           <nz-card class="h-full dashboard-card">
             <img src="assets/images/landing_dashboard_3.svg" alt="Automation" class="w-full h-48 object-contain mb-4">
-            <h3 class="text-xl font-bold text-paytomic-dark mb-3 text-center">Smart automatisering</h3>
+            <h3 class="text-xl font-bold text-paytomic-dark mb-3 text-center border-b-2 border-paytomic-sage pb-2">Smart automatisering</h3>
             <p class="text-paytomic-slate text-center">
               Automatiske påmindelser sendes på det perfekte tidspunkt baseret på dine regler og kundehistorik.
             </p>
@@ -160,7 +160,7 @@
         <div nz-col [nzXs]="24" [nzMd]="12" [nzLg]="8" *ngFor="let feature of features">
           <nz-card class="h-full feature-card hover:shadow-lg transition-shadow">
             <div class="flex flex-col items-center text-center">
-              <span nz-icon [nzType]="feature.icon" nzTheme="outline" class="text-4xl text-paytomic-slate mb-4"></span>
+              <span nz-icon [nzType]="feature.icon" nzTheme="outline" class="text-4xl text-paytomic-sage mb-4"></span>
               <h3 class="text-xl font-bold text-paytomic-dark mb-3">{{ feature.title }}</h3>
               <p class="text-paytomic-slate">{{ feature.description }}</p>
             </div>
@@ -188,12 +188,12 @@
   <!-- Final CTA Section -->
   <section class="py-24 bg-paytomic-dark">
     <div class="max-w-4xl mx-auto px-8 text-center">
-      <h2 class="text-4xl font-bold text-paytomic-cream mb-6">Klar til at komme i gang?</h2>
+      <h2 class="text-4xl font-bold !text-paytomic-cream mb-6">Klar til at komme i gang?</h2>
       <p class="text-xl text-paytomic-cream mb-10 max-w-2xl mx-auto">
         Tilmeld dig vores early access program og vær blandt de første til at bruge Paytomic.
       </p>
       <a [href]="'mailto:' + email">
-        <button nz-button nzType="primary" nzSize="large" class="px-12 py-6 text-lg h-auto">
+        <button nz-button nzType="primary" nzSize="large" class="px-12 py-6 text-lg h-auto !bg-paytomic-sage">
           <span nz-icon nzType="user-add" nzTheme="outline" class="mr-2"></span>
           Tilmeld dig early access
         </button>
