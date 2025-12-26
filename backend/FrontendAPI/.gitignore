@@ -1,0 +1,102 @@
+## .NET Core
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+
+## User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## Visual Studio / Rider
+.vs/
+.idea/
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
+
+# Visual Studio cache
+.vscode/
+*.code-workspace
+
+## Rider
+.idea/
+*.sln.iml
+
+## User Secrets (already safe, but for clarity)
+# User secrets are stored in:
+# ~/.microsoft/usersecrets/ (NOT in project folder)
+
+## Environment-specific config files with secrets
+appsettings.Local.json
+appsettings.*.local.json
+*.local.json
+
+## Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+## Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+## OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+## JetBrains Rider
+.idea/
+*.sln.iml
+*.DotSettings.user
+
+## Test coverage
+coverage/
+*.coverage
+*.coveragexml
+
+## NuGet
+*.nupkg
+*.snupkg
+packages/
+!packages/build/
+
+## Backup files
+*.bak
+*.backup
+*~
+
