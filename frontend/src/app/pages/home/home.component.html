@@ -1,6 +1,6 @@
 <div class="min-h-screen">
   <!-- Hero Section -->
-  <section class="hero-section relative overflow-hidden py-16 md:py-24">
+  <section class="hero-section relative overflow-hidden py-16 md:py-24" appFadeIn>
     <div class="max-w-7xl mx-auto px-8">
       <div nz-row [nzGutter]="[48, 48]" nzAlign="middle">
         <div nz-col [nzXs]="24" [nzMd]="12">
@@ -59,7 +59,7 @@
   </section>
 
   <!-- Analysis Section -->
-  <section class="py-20 bg-white">
+  <section class="py-20 bg-white" appFadeIn>
     <div class="max-w-6xl mx-auto px-8">
       <div nz-row [nzGutter]="[48, 48]" nzAlign="middle">
         <div nz-col [nzXs]="24" [nzMd]="12">
@@ -92,7 +92,7 @@
   </section>
 
   <!-- How It Works Section -->
-  <section class="py-20 bg-white">
+  <section class="py-20 bg-white" appFadeIn>
     <div class="max-w-6xl mx-auto px-8">
       <h2 class="text-4xl font-bold text-paytomic-dark mb-4 text-center">Sådan virker det</h2>
       <p class="text-xl text-paytomic-slate mb-24 text-center max-w-2xl mx-auto">
@@ -111,7 +111,7 @@
   </section>
 
   <!-- Dashboard Features Section -->
-  <section class="py-20 bg-paytomic-cream">
+  <section class="py-20 bg-paytomic-cream" appFadeIn>
     <div class="max-w-6xl mx-auto px-8">
       <h2 class="text-4xl font-bold text-paytomic-dark mb-4 text-center">Hold styr på alt på ét sted</h2>
       <p class="text-xl text-paytomic-slate mb-16 text-center max-w-2xl mx-auto">
@@ -150,7 +150,7 @@
   </section>
 
   <!-- Features Section -->
-  <section class="py-20 bg-paytomic-cream">
+  <section class="py-20 bg-paytomic-cream" appFadeIn>
     <div class="max-w-6xl mx-auto px-8">
       <h2 class="text-4xl font-bold text-paytomic-dark mb-4 text-center">Hvorfor Paytomic?</h2>
       <p class="text-xl text-paytomic-slate mb-16 text-center max-w-2xl mx-auto">
@@ -160,7 +160,7 @@
         <div nz-col [nzXs]="24" [nzMd]="12" [nzLg]="8" *ngFor="let feature of features">
           <nz-card class="h-full feature-card hover:shadow-lg transition-shadow">
             <div class="flex flex-col items-center text-center">
-              <nz-icon [nzType]="feature.icon" nzTheme="outline" class="text-4xl text-paytomic-sage mb-4" />
+              <nz-icon [nzType]="feature.icon" nzTheme="twotone" [nzTwotoneColor]="feature.color" class="text-4xl mb-4" />
               <h3 class="text-xl font-bold text-paytomic-dark mb-3">{{ feature.title }}</h3>
               <p class="text-paytomic-slate">{{ feature.description }}</p>
             </div>
@@ -171,22 +171,57 @@
   </section>
 
   <!-- FAQ Section -->
-  <section class="py-20 bg-white">
+  <section class="py-20 bg-white" appFadeIn>
     <div class="max-w-4xl mx-auto px-8">
-      <h2 class="text-4xl font-bold text-paytomic-dark mb-4 text-center">Ofte stillede spørgsmål</h2>
-      <p class="text-xl text-paytomic-slate mb-12 text-center">
-        Har du spørgsmål? Vi har svarene
-      </p>
-      <nz-collapse>
-        <nz-collapse-panel *ngFor="let faq of faqs" [nzHeader]="faq.question" [nzActive]="faq.active">
-          <p class="text-paytomic-slate text-lg">{{ faq.answer }}</p>
-        </nz-collapse-panel>
-      </nz-collapse>
+      <div class="text-center mb-16">
+        <div class="inline-block px-6 py-2 mb-6 rounded-full" style="background: rgba(143, 169, 155, 0.1); border: 1px solid rgba(143, 169, 155, 0.2);">
+          <span class="text-sm font-semibold" style="color: #8FA99B;">FAQ</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold text-paytomic-dark mb-4" style="letter-spacing: -0.02em;">Ofte stillede spørgsmål</h2>
+        <p class="text-xl text-paytomic-slate">
+          Har du spørgsmål? Vi har svarene
+        </p>
+      </div>
+      
+      <div class="space-y-4">
+        <div *ngFor="let faq of faqs; let i = index" 
+             class="rounded-2xl cursor-pointer transition-all duration-300" 
+             style="background: #ffffff; border: 1px solid rgba(143, 169, 155, 0.15); box-shadow: 0 2px 8px rgba(45, 60, 69, 0.04);"
+             (click)="faq.active = !faq.active">
+          <!-- Header -->
+          <div class="flex items-center justify-between p-6">
+            <div class="flex items-center gap-4 flex-1">
+              <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" 
+                   [style.background]="'linear-gradient(135deg, ' + faq.iconColor + '15 0%, ' + faq.iconColor + '08 100%)'" 
+                   [style.border]="'1px solid ' + faq.iconColor + '25'">
+                <nz-icon [nzType]="faq.icon" nzTheme="twotone" [nzTwotoneColor]="faq.iconColor" class="text-2xl" />
+              </div>
+              <h3 class="text-lg font-bold text-paytomic-dark">{{ faq.question }}</h3>
+            </div>
+            <nz-icon [nzType]="faq.active ? 'up' : 'down'" class="text-paytomic-slate text-xl transition-transform duration-300" />
+          </div>
+          
+          <!-- Answer (collapsible) -->
+          <div *ngIf="faq.active" class="px-6 pb-6 pl-20 animate-fadeIn">
+            <p class="text-paytomic-slate text-base leading-relaxed">{{ faq.answer }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-12 text-center p-6 rounded-2xl" style="background: linear-gradient(135deg, rgba(143, 169, 155, 0.05) 0%, rgba(143, 169, 155, 0.02) 100%); border: 1px solid rgba(143, 169, 155, 0.15);">
+        <p class="text-paytomic-slate text-lg mb-4">Mangler du svar på noget?</p>
+        <a routerLink="/kontakt">
+          <button nz-button nzType="default" nzSize="large" class="px-8">
+            <nz-icon nzType="mail" nzTheme="outline" class="mr-2" />
+            Kontakt os
+          </button>
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- Final CTA Section -->
-  <section class="py-24 bg-paytomic-dark">
+  <section style="background: linear-gradient(135deg, rgba(45, 60, 69, 0.97) 0%, rgba(65, 87, 100, 0.95) 100%); backdrop-filter: blur(40px);" class="py-24" appFadeIn>
     <div class="max-w-4xl mx-auto px-8 text-center">
       <h2 class="text-4xl font-bold !text-paytomic-cream mb-6">Klar til at komme i gang?</h2>
       <p class="text-xl text-paytomic-cream mb-10 max-w-2xl mx-auto">

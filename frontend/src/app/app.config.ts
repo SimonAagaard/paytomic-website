@@ -35,7 +35,11 @@ import {
   FundTwoTone,
   ClockCircleTwoTone,
   MailTwoTone,
-  BulbTwoTone
+  BulbTwoTone,
+  SafetyCertificateTwoTone,
+  InteractionTwoTone,
+  DollarTwoTone,
+  HeartTwoTone
 } from '@ant-design/icons-angular/icons';
 
 import { routes } from './app.routes';
@@ -78,7 +82,11 @@ export const appConfig: ApplicationConfig = {
       FundTwoTone,
       ClockCircleTwoTone,
       MailTwoTone,
-      BulbTwoTone
+      BulbTwoTone,
+      SafetyCertificateTwoTone,
+      InteractionTwoTone,
+      DollarTwoTone,
+      HeartTwoTone
     ])
   ]
 };
