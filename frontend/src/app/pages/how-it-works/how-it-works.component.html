@@ -75,7 +75,7 @@
                 <!-- Accounting System -->
                 <div class="flex-1 p-6 rounded-2xl" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.03) 100%); border: 1px solid rgba(37, 99, 235, 0.15);">
                   <div class="text-center">
-                    <nz-icon nzType="database" nzTheme="twotone" [nzTwotoneColor]="'#2563EB'" class="text-5xl mb-3" />
+                    <nz-icon nzType="database" nzTheme="outline" class="text-5xl mb-3" style="color: #2563EB;" />
                     <p class="text-sm font-semibold text-paytomic-dark">Visma Dinero</p>
                     <p class="text-xs text-paytomic-slate mt-1">Regnskabssystem</p>
                   </div>
@@ -96,7 +96,7 @@
                 <!-- Paytomic -->
                 <div class="flex-1 p-6 rounded-2xl" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(37, 99, 235, 0.05) 100%); border: 1px solid rgba(37, 99, 235, 0.2);">
                   <div class="text-center">
-                    <nz-icon nzType="robot" nzTheme="twotone" [nzTwotoneColor]="'#2563EB'" class="text-5xl mb-3" />
+                    <nz-icon nzType="tool" nzTheme="twotone" class="text-5xl mb-3" style="color: #2563EB;" />
                     <p class="text-sm font-semibold text-paytomic-dark">Paytomic</p>
                     <p class="text-xs text-paytomic-slate mt-1">Automatisering</p>
                   </div>
@@ -297,7 +297,6 @@
         <div nz-col [nzXs]="24" [nzMd]="12">
           <nz-card class="automation-highlight">
             <h3 class="text-2xl font-bold text-paytomic-dark mb-4">
-              <nz-icon nzType="robot" nzTheme="twotone" [nzTwotoneColor]="'#8FA99B'" class="mr-2" />
               Automatisering du kan stole på
             </h3>
             <div class="space-y-5">
@@ -566,10 +565,7 @@
         Tilmeld dig early access og vær blandt de første til at spare timer hver uge på fakturapåmindelser.
       </p>
       <a [href]="'mailto:' + email">
-        <button nz-button nzType="primary" nzSize="large" class="px-14 py-7 text-lg h-auto" style="background: linear-gradient(135deg, #8FA99B 0%, #7a9489 100%); border: none; border-radius: 16px; font-weight: 600; box-shadow: 0 8px 24px rgba(143, 169, 155, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-2px) scale(1.02)'; this.style.boxShadow='0 12px 32px rgba(143, 169, 155, 0.4)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 24px rgba(143, 169, 155, 0.3)'">
-          <nz-icon nzType="user-add" nzTheme="twotone" [nzTwotoneColor]="'#ffffff'" class="mr-3" />
-          Tilmeld dig early access
-        </button>
+        <button nz-button nzType="primary" nzSize="large" class="px-14 py-7 text-lg h-auto" style="background: linear-gradient(135deg, #8FA99B 0%, #7a9489 100%); border: none; border-radius: 16px; font-weight: 600; box-shadow: 0 8px 24px rgba(143, 169, 155, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-2px) scale(1.02)'; this.style.boxShadow='0 12px 32px rgba(143, 169, 155, 0.4)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 24px rgba(143, 169, 155, 0.3)'"><nz-icon nzType="user-add" nzTheme="outline" class="mr-3" style="color: #ffffff;" /><span>Tilmeld dig early access</span></button>
       </a>
       <p class="!text-white/80 mt-10">
         Har du spørgsmål? 

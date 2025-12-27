@@ -1,4 +1,5 @@
-import { Directive, ElementRef, OnInit, OnDestroy, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, OnInit, OnDestroy, Renderer2, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
   selector: '[appFadeIn]',
@@ -9,10 +10,19 @@ export class FadeInDirective implements OnInit, OnDestroy {
 
   constructor(
     private el: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit() {
+    // Only run animations in browser
+    if (!isPlatformBrowser(this.platformId)) {
+      // On server, show content immediately without animation
+      this.renderer.setStyle(this.el.nativeElement, 'opacity', '1');
+      this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateY(0)');
+      return;
+    }
+
     // Set initial state
     this.renderer.setStyle(this.el.nativeElement, 'opacity', '0');
     this.renderer.setStyle(this.el.nativeElement, 'transform', 'translateY(30px)');

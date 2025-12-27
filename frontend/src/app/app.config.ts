@@ -24,6 +24,7 @@ import {
   ArrowRightOutline,
   RocketOutline,
   LinkedinFill,
+  DatabaseOutline,
   ApiTwoTone,
   SettingTwoTone,
   RocketTwoTone,
@@ -39,10 +40,16 @@ import {
   SafetyCertificateTwoTone,
   InteractionTwoTone,
   DollarTwoTone,
-  HeartTwoTone
+  HeartTwoTone,
+  ThunderboltTwoTone,
+  UpOutline,
+  DownOutline,
+  EyeTwoTone,
+  ToolTwoTone
 } from '@ant-design/icons-angular/icons';
 
 import { routes } from './app.routes';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 registerLocaleData(da);
 
@@ -71,6 +78,7 @@ export const appConfig: ApplicationConfig = {
       ArrowRightOutline,
       RocketOutline,
       LinkedinFill,
+      DatabaseOutline,
       ApiTwoTone,
       SettingTwoTone,
       RocketTwoTone,
@@ -86,7 +94,12 @@ export const appConfig: ApplicationConfig = {
       SafetyCertificateTwoTone,
       InteractionTwoTone,
       DollarTwoTone,
-      HeartTwoTone
-    ])
+      HeartTwoTone,
+      ThunderboltTwoTone,
+      UpOutline,
+      DownOutline,
+      EyeTwoTone,
+      ToolTwoTone
+    ]), provideClientHydration(withEventReplay())
   ]
 };
