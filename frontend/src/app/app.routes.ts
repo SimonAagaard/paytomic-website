@@ -6,19 +6,19 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
   },
   {
-    path: 'about',
+    path: 'om-os',
     loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent)
   },
   {
-    path: 'how-it-works',
+    path: 'hvordan-virker-det',
     loadComponent: () => import('./pages/how-it-works/how-it-works.component').then(m => m.HowItWorksComponent)
   },
   {
-    path: 'pricing',
+    path: 'priser',
     loadComponent: () => import('./pages/pricing/pricing.component').then(m => m.PricingComponent)
   },
   {
-    path: 'contact',
+    path: 'kontakt',
     loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent)
   },
   {
@@ -26,8 +26,12 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/privacy/privacy.component').then(m => m.PrivacyComponent)
   },
   {
-    path: 'terms',
+    path: 'vilkaar',
     loadComponent: () => import('./pages/terms/terms.component').then(m => m.TermsComponent)
+  },
+  {
+    path: 'cookie-politik',
+    loadComponent: () => import('./pages/cookies/cookies.component').then(m => m.CookiesComponent)
   },
   {
     path: '**',

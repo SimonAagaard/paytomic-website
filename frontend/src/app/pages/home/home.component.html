@@ -19,13 +19,13 @@
           <div class="flex flex-col sm:flex-row gap-4 mb-8">
             <a [href]="'mailto:' + email">
               <button nz-button nzType="primary" nzSize="large" class="px-10 py-6 text-lg h-auto hero-cta">
-                <span nz-icon nzType="user-add" nzTheme="outline" class="mr-2"></span>
+                <nz-icon nzType="user-add" nzTheme="outline" class="mr-2" />
                 Tilmeld dig early access
               </button>
             </a>
-            <a routerLink="/how-it-works">
+            <a routerLink="/hvordan-virker-det">
               <button nz-button nzType="default" nzSize="large" class="px-10 py-6 text-lg h-auto">
-                <span nz-icon nzType="play-circle" nzTheme="outline" class="mr-2"></span>
+                <nz-icon nzType="play-circle" nzTheme="outline" class="mr-2" />
                 Se hvordan det virker
               </button>
             </a>
@@ -33,15 +33,15 @@
 
           <div class="flex items-center gap-6 text-sm text-paytomic-slate">
             <div class="flex items-center gap-2">
-              <span nz-icon nzType="check-circle" nzTheme="fill" class="text-paytomic-sage"></span>
+              <nz-icon nzType="check-circle" nzTheme="fill" class="text-paytomic-sage" />
               <span>Gratis early access</span>
             </div>
             <div class="flex items-center gap-2">
-              <span nz-icon nzType="check-circle" nzTheme="fill" class="text-paytomic-sage"></span>
+              <nz-icon nzType="check-circle" nzTheme="fill" class="text-paytomic-sage" />
               <span>Ingen kreditkort</span>
             </div>
             <div class="flex items-center gap-2">
-              <span nz-icon nzType="check-circle" nzTheme="fill" class="text-paytomic-sage"></span>
+              <nz-icon nzType="check-circle" nzTheme="fill" class="text-paytomic-sage" />
               <span>Opsæt på 10 min</span>
             </div>
           </div>
@@ -132,7 +132,7 @@
             <img src="assets/images/landing_dashboard_2.svg" alt="Analytics" class="w-full h-48 object-contain mb-4">
             <h3 class="text-xl font-bold text-paytomic-dark mb-3 text-center border-b-2 border-paytomic-sage pb-2">Dybdegående analyse</h3>
             <p class="text-paytomic-slate text-center">
-              Forstå dine debitors betalingsmønstre med detaljerede rapporter og visualiseringer af din cashflow.
+              Forstå dine debitors betalingsmønstre med detaljerede rapporter og visualiseringer af dit cashflow.
             </p>
           </nz-card>
         </div>
@@ -160,7 +160,7 @@
         <div nz-col [nzXs]="24" [nzMd]="12" [nzLg]="8" *ngFor="let feature of features">
           <nz-card class="h-full feature-card hover:shadow-lg transition-shadow">
             <div class="flex flex-col items-center text-center">
-              <span nz-icon [nzType]="feature.icon" nzTheme="outline" class="text-4xl text-paytomic-sage mb-4"></span>
+              <nz-icon [nzType]="feature.icon" nzTheme="outline" class="text-4xl text-paytomic-sage mb-4" />
               <h3 class="text-xl font-bold text-paytomic-dark mb-3">{{ feature.title }}</h3>
               <p class="text-paytomic-slate">{{ feature.description }}</p>
             </div>
@@ -194,13 +194,13 @@
       </p>
       <a [href]="'mailto:' + email">
         <button nz-button nzType="primary" nzSize="large" class="px-12 py-6 text-lg h-auto !bg-paytomic-sage">
-          <span nz-icon nzType="user-add" nzTheme="outline" class="mr-2"></span>
+          <nz-icon nzType="user-add" nzTheme="outline" class="mr-2" />
           Tilmeld dig early access
         </button>
       </a>
       <p class="text-paytomic-cream mt-8">
         Har du spørgsmål? 
-        <a routerLink="/contact" class="text-paytomic-cream underline hover:opacity-80 ml-1">Kontakt os</a>
+        <a routerLink="/kontakt" class="!text-blue-400 !underline ml-1">Kontakt os</a>
       </p>
     </div>
   </section>

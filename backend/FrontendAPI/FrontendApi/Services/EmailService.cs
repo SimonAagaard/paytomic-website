@@ -16,7 +16,9 @@ public class EmailService : IEmailService
 
     public EmailService(IConfiguration configuration, ILogger<EmailService> logger)
     {
-        _emailSettings = configuration.GetSection("EmailSettings").Get<EmailSettings>()  //TOOD: Retrieve email setting password in another place than appsettings, locally it is stored in user secrets
+        // Password stored securely: Dev=User Secrets, Prod=Environment Variables
+        // See SMTP-PASSWORD-OPTIONS.md and SECURITY-SECRETS.md for details
+        _emailSettings = configuration.GetSection("EmailSettings").Get<EmailSettings>()
             ?? throw new InvalidOperationException("EmailSettings configuration is missing");
         _logger = logger;
     }

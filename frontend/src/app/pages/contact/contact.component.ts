@@ -129,7 +129,7 @@ export class ContactComponent {
           this.isSubmitting = false;
           console.error('Error submitting form:', error);
           
-          const errorMessage = error.error?.message || 'Der opstod en fejl ved afsendelse af din besked. Prøv venligst igen senere.';
+          const errorMessage = 'Der opstod en fejl ved afsendelse af din besked. Prøv venligst igen senere. eller send en e-mail direkte til hello@paytomic.dk';
           this.message.error(errorMessage);
         }
       });

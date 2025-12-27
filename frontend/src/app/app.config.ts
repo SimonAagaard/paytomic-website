@@ -22,7 +22,20 @@ import {
   DashboardOutline,
   MessageOutline,
   ArrowRightOutline,
-  RocketOutline
+  RocketOutline,
+  LinkedinFill,
+  ApiTwoTone,
+  SettingTwoTone,
+  RocketTwoTone,
+  CheckCircleTwoTone,
+  FileTextTwoTone,
+  EditTwoTone,
+  DashboardTwoTone,
+  PauseCircleTwoTone,
+  FundTwoTone,
+  ClockCircleTwoTone,
+  MailTwoTone,
+  BulbTwoTone
 } from '@ant-design/icons-angular/icons';
 
 import { routes } from './app.routes';
@@ -52,7 +65,20 @@ export const appConfig: ApplicationConfig = {
       DashboardOutline,
       MessageOutline,
       ArrowRightOutline,
-      RocketOutline
+      RocketOutline,
+      LinkedinFill,
+      ApiTwoTone,
+      SettingTwoTone,
+      RocketTwoTone,
+      CheckCircleTwoTone,
+      FileTextTwoTone,
+      EditTwoTone,
+      DashboardTwoTone,
+      PauseCircleTwoTone,
+      FundTwoTone,
+      ClockCircleTwoTone,
+      MailTwoTone,
+      BulbTwoTone
     ])
   ]
 };

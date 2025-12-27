@@ -1,1 +1,59 @@
 /* How it works component styles */
+
+.step-number-large {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8FA99B 0%, #6b8a7a 100%);
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.step-card {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.step-card:hover {
+  border-color: #8FA99B;
+  box-shadow: 0 10px 25px rgba(143, 169, 155, 0.15);
+  transform: translateY(-4px);
+}
+
+.timeline-content {
+  padding-left: 0.5rem;
+}
+
+.automation-highlight {
+  background: linear-gradient(135deg, #f8faf7 0%, #ffffff 100%);
+  border-left: 4px solid #8FA99B;
+}
+
+.template-option {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.template-option:hover {
+  border-color: #8FA99B;
+  box-shadow: 0 8px 20px rgba(143, 169, 155, 0.12);
+  transform: translateY(-3px);
+}
+
+.before-card {
+  border-left: 4px solid #ef4444;
+}
+
+.after-card {
+  border-left: 4px solid #8FA99B;
+  background: linear-gradient(135deg, #f8faf7 0%, #ffffff 100%);
+}
+
+::ng-deep .ant-timeline-item-head {
+  background-color: #8FA99B !important;
+}
+

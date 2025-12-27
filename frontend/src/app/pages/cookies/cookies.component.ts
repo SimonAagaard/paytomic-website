@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-terms',
+  selector: 'app-cookies',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './terms.component.html',
-  styleUrls: ['./terms.component.css']
+  templateUrl: './cookies.component.html',
+  styleUrls: ['./cookies.component.css']
 })
-export class TermsComponent {
+export class CookiesComponent {
 }

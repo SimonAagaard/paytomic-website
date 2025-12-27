@@ -41,8 +41,6 @@
       <!-- Founders Section -->
       <div nz-col [nzXs]="24" [nzLg]="10">
         <div class="sticky top-8">
-          <h2 class="text-3xl font-bold text-paytomic-dark mb-6">Personen bag</h2>
-          
           @for (founder of founders; track founder.name) {
             <nz-card class="founder-card mb-6">
               <div class="flex flex-col items-center text-center">
@@ -54,7 +52,7 @@
                 <p class="text-paytomic-slate leading-relaxed">{{ founder.bio }}</p>
                 @if (founder.linkedin) {
                   <a [href]="founder.linkedin" target="_blank" rel="noopener noreferrer" class="mt-4 text-paytomic-slate hover:text-paytomic-dark transition-colors">
-                    <span nz-icon nzType="linkedin" nzTheme="fill" class="text-2xl"></span>
+                    <nz-icon nzType="linkedin" nzTheme="fill" class="text-2xl" />
                   </a>
                 }
               </div>
@@ -63,7 +61,7 @@
 
           <!-- Mission Statement -->
           <nz-card class="mission-card">
-            <h3 class="text-xl font-bold text-paytomic-dark mb-3">Vores Mission</h3>
+            <h3 class="text-xl font-bold text-paytomic-dark mb-3">Mission</h3>
             <p class="text-paytomic-slate leading-relaxed">
               At gøre fakturapåmindelser og rykkere så enkle og effektive, at danske virksomheder kan fokusere på det, de er bedst til – at drive forretning.
             </p>

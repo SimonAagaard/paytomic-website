@@ -80,7 +80,7 @@ export class AboutComponent {
     {
       name: 'Simon Aagaard',
       role: 'Stifter',
-      bio: 'Med en baggrund i softwareudvikling, erfaring fra konsulentbranchen og en tro på at monitorering og opfølgning på forfaldne fakturaer ikke skal stjæle fokus fra kerneforretningen, vil jeg med Paytomic hjælpe virksomheder med at forbedre deres likviditet gennem automatisering.',
+      bio: 'Med et årti i softwareudvikling, erfaring fra konsulentbranchen og en tro på at monitorering og opfølgning på forfaldne fakturaer ikke skal stjæle fokus fra kerneforretningen, vil jeg med Paytomic hjælpe virksomheder med at forbedre deres likviditet gennem automatisering.',
       image: 'assets/images/portrait_transparent_1_1.png',
       linkedin: 'https://www.linkedin.com/in/simon-aagaard-82725b159'
     }
