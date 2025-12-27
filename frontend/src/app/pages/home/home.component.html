@@ -1,55 +1,124 @@
 <div class="min-h-screen">
   <!-- Hero Section -->
-  <section class="hero-section relative overflow-hidden py-16 md:py-24" appFadeIn>
+  <section class="hero-section relative overflow-hidden py-20 md:py-32" appFadeIn>
     <div class="max-w-7xl mx-auto px-8">
-      <div nz-row [nzGutter]="[48, 48]" nzAlign="middle">
+      <div nz-row [nzGutter]="[64, 48]" nzAlign="middle">
         <div nz-col [nzXs]="24" [nzMd]="12">
-          <div class="hero-badge mb-6">
-            <span class="px-4 py-2 bg-paytomic-slate/10 rounded-full text-paytomic-slate font-semibold text-sm inline-block">
-              Nu tilgængelig i early access
-            </span>
+          <!-- Badge -->
+          <div class="inline-block px-5 py-2.5 mb-8 rounded-full" style="background: linear-gradient(135deg, rgba(143, 169, 155, 0.12) 0%, rgba(143, 169, 155, 0.05) 100%); border: 1px solid rgba(143, 169, 155, 0.2);">
+            <span class="text-sm font-bold" style="color: #8FA99B;">Nu tilgængelig i early access</span>
           </div>
-          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-paytomic-dark mb-6 leading-tight">
-            Stop med at jage<br/>ubetalte fakturaer
+          
+          <!-- Main Headline -->
+          <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold text-paytomic-dark mb-8 leading-tight" style="letter-spacing: -0.03em;">
+            Stop med at<br/>jage <span style="background: linear-gradient(135deg, #8FA99B 0%, #7a9489 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ubetalte</span><br/>fakturaer
           </h1>
-          <p class="text-xl md:text-2xl text-paytomic-slate mb-8 leading-relaxed">
-            Paytomic sender automatisk professionelle påmindelser til dine debitorer, så du får betaling hurtigere og kan fokusere på at drive din virksomhed.
+          
+          <!-- Subheadline -->
+          <p class="text-xl md:text-2xl text-paytomic-slate mb-10 leading-relaxed max-w-xl">
+            <strong>Automatiser</strong> dine fakturapåmindelser og få betaling hurtigere. Paytomic håndterer opfølgningen, så du kan fokusere på din forretning.
           </p>
           
-          <div class="flex flex-col sm:flex-row gap-4 mb-8">
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 mb-12">
             <a [href]="'mailto:' + email">
-              <button nz-button nzType="primary" nzSize="large" class="px-10 py-6 text-lg h-auto hero-cta">
-                <nz-icon nzType="user-add" nzTheme="outline" class="mr-2" />
-                Tilmeld dig early access
+              <button nz-button nzType="primary" nzSize="large" class="px-12 py-7 text-lg h-auto hero-cta" style="background: linear-gradient(135deg, #8FA99B 0%, #7a9489 100%); border: none; border-radius: 16px; font-weight: 600; box-shadow: 0 8px 24px rgba(143, 169, 155, 0.3);">
+                <nz-icon nzType="rocket" nzTheme="twotone" [nzTwotoneColor]="'#ffffff'" class="mr-2" />
+                Kom i gang gratis
               </button>
             </a>
             <a routerLink="/hvordan-virker-det">
-              <button nz-button nzType="default" nzSize="large" class="px-10 py-6 text-lg h-auto">
+              <button nz-button nzType="default" nzSize="large" class="px-10 py-7 text-lg h-auto" style="border-radius: 16px; border: 2px solid rgba(143, 169, 155, 0.3); font-weight: 600;">
                 <nz-icon nzType="play-circle" nzTheme="outline" class="mr-2" />
                 Se hvordan det virker
               </button>
             </a>
           </div>
 
-          <div class="flex items-center gap-6 text-sm text-paytomic-slate">
+          <!-- Trust Indicators -->
+          <div class="flex flex-wrap items-center gap-6 text-base text-paytomic-slate">
             <div class="flex items-center gap-2">
-              <nz-icon nzType="check-circle" nzTheme="fill" class="text-paytomic-sage" />
-              <span>Gratis early access</span>
+              <nz-icon nzType="check-circle" nzTheme="twotone" [nzTwotoneColor]="'#10B981'" class="text-xl" />
+              <span class="font-medium">Gratis early access</span>
             </div>
             <div class="flex items-center gap-2">
-              <nz-icon nzType="check-circle" nzTheme="fill" class="text-paytomic-sage" />
-              <span>Ingen kreditkort</span>
+              <nz-icon nzType="safety-certificate" nzTheme="twotone" [nzTwotoneColor]="'#2563EB'" class="text-xl" />
+              <span class="font-medium">Ingen kreditkort</span>
             </div>
             <div class="flex items-center gap-2">
-              <nz-icon nzType="check-circle" nzTheme="fill" class="text-paytomic-sage" />
-              <span>Opsæt på 10 min</span>
+              <nz-icon nzType="clock-circle" nzTheme="twotone" [nzTwotoneColor]="'#F59E0B'" class="text-xl" />
+              <span class="font-medium">Opsæt på 10 min</span>
             </div>
           </div>
         </div>
         
+        <!-- Right Side - Stats Cards -->
         <div nz-col [nzXs]="24" [nzMd]="12">
-          <div class="hero-image-wrapper">
-            <img src="assets/images/landing_hero.svg" alt="Paytomic Dashboard" class="w-full h-auto">
+          <div class="space-y-6">
+            <!-- Main Visual Card -->
+            <div class="p-8 rounded-3xl" style="background: linear-gradient(135deg, rgba(143, 169, 155, 0.08) 0%, rgba(255, 255, 255, 0.5) 100%); border: 1px solid rgba(143, 169, 155, 0.2); box-shadow: 0 20px 60px rgba(45, 60, 69, 0.08);">
+              <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #8FA99B 0%, #7a9489 100%);">
+                    <nz-icon nzType="dashboard" nzTheme="outline" class="text-2xl text-white" />
+                  </div>
+                  <div>
+                    <p class="text-sm text-paytomic-slate font-medium">Paytomic Dashboard</p>
+                    <p class="text-xs text-paytomic-slate/60">Realtids overblik</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 px-3 py-1.5 rounded-full" style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2);">
+                  <div class="w-2 h-2 rounded-full" style="background: #22C55E; animation: pulse 2s ease-in-out infinite;"></div>
+                  <span class="text-xs font-bold" style="color: #22C55E;">LIVE</span>
+                </div>
+              </div>
+              
+              <!-- Mock stats -->
+              <div class="grid grid-cols-2 gap-4 mb-6">
+                <div class="p-5 rounded-2xl" style="background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(143, 169, 155, 0.15);">
+                  <p class="text-sm text-paytomic-slate mb-2 font-medium">Ubetalte fakturaer</p>
+                  <p class="text-4xl font-bold text-paytomic-dark">24</p>
+                  <p class="text-xs text-green-600 mt-1 font-semibold">↓ 67% denne måned</p>
+                </div>
+                <div class="p-5 rounded-2xl" style="background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(143, 169, 155, 0.15);">
+                  <p class="text-sm text-paytomic-slate mb-2 font-medium">Gennemsnitstid</p>
+                  <p class="text-4xl font-bold text-paytomic-dark">12d</p>
+                  <p class="text-xs text-green-600 mt-1 font-semibold">↓ 45% hurtigere</p>
+                </div>
+              </div>
+              
+              <!-- Recent activity -->
+              <div class="space-y-3">
+                <div class="flex items-center gap-3 p-3 rounded-xl" style="background: rgba(34, 197, 94, 0.05);">
+                  <nz-icon nzType="check-circle" nzTheme="twotone" [nzTwotoneColor]="'#10B981'" class="text-xl" />
+                  <div class="flex-1">
+                    <p class="text-sm font-semibold text-paytomic-dark">Faktura #1234 betalt</p>
+                    <p class="text-xs text-paytomic-slate">2 minutter siden</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-xl" style="background: rgba(37, 99, 235, 0.05);">
+                  <nz-icon nzType="mail" nzTheme="twotone" [nzTwotoneColor]="'#2563EB'" class="text-xl" />
+                  <div class="flex-1">
+                    <p class="text-sm font-semibold text-paytomic-dark">Påmindelse sendt</p>
+                    <p class="text-xs text-paytomic-slate">15 minutter siden</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Small stat cards -->
+            <div class="grid grid-cols-2 gap-4">
+              <div class="p-6 rounded-2xl text-center" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(255, 255, 255, 0.5) 100%); border: 1px solid rgba(37, 99, 235, 0.15);">
+                <nz-icon nzType="thunderbolt" nzTheme="twotone" [nzTwotoneColor]="'#2563EB'" class="text-4xl mb-2" />
+                <p class="text-2xl font-bold text-paytomic-dark">100%</p>
+                <p class="text-sm text-paytomic-slate font-medium">Automatisk</p>
+              </div>
+              <div class="p-6 rounded-2xl text-center" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(255, 255, 255, 0.5) 100%); border: 1px solid rgba(245, 158, 11, 0.15);">
+                <nz-icon nzType="clock-circle" nzTheme="twotone" [nzTwotoneColor]="'#F59E0B'" class="text-4xl mb-2" />
+                <p class="text-2xl font-bold text-paytomic-dark">24/7</p>
+                <p class="text-sm text-paytomic-slate font-medium">Overvågning</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -220,22 +289,22 @@
     </div>
   </section>
 
-  <!-- Final CTA Section -->
-  <section style="background: linear-gradient(135deg, rgba(45, 60, 69, 0.97) 0%, rgba(65, 87, 100, 0.95) 100%); backdrop-filter: blur(40px);" class="py-24" appFadeIn>
+ <!-- CTA Section -->
+  <section class="py-28" style="background: linear-gradient(135deg, rgba(45, 60, 69, 0.97) 0%, rgba(65, 87, 100, 0.95) 100%); backdrop-filter: blur(40px);" appFadeIn>
     <div class="max-w-4xl mx-auto px-8 text-center">
-      <h2 class="text-4xl font-bold !text-paytomic-cream mb-6">Klar til at komme i gang?</h2>
-      <p class="text-xl text-paytomic-cream mb-10 max-w-2xl mx-auto">
-        Tilmeld dig vores early access program og vær blandt de første til at bruge Paytomic.
+      <h2 class="text-5xl font-bold !text-white mb-8" style="letter-spacing: -0.02em;">Klar til at automatisere dine påmindelser?</h2>
+      <p class="text-xl !text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed" style="font-weight: 400;">
+        Tilmeld dig early access og vær blandt de første til at spare timer hver uge på fakturapåmindelser.
       </p>
       <a [href]="'mailto:' + email">
-        <button nz-button nzType="primary" nzSize="large" class="px-12 py-6 text-lg h-auto !bg-paytomic-sage">
-          <nz-icon nzType="user-add" nzTheme="outline" class="mr-2" />
+        <button nz-button nzType="primary" nzSize="large" class="px-14 py-7 text-lg h-auto" style="background: linear-gradient(135deg, #8FA99B 0%, #7a9489 100%); border: none; border-radius: 16px; font-weight: 600; box-shadow: 0 8px 24px rgba(143, 169, 155, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-2px) scale(1.02)'; this.style.boxShadow='0 12px 32px rgba(143, 169, 155, 0.4)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 24px rgba(143, 169, 155, 0.3)'">
+          <nz-icon nzType="user-add" nzTheme="twotone" [nzTwotoneColor]="'#ffffff'" class="mr-3" />
           Tilmeld dig early access
         </button>
       </a>
-      <p class="text-paytomic-cream mt-8">
+      <p class="!text-white/80 mt-10">
         Har du spørgsmål? 
-        <a routerLink="/kontakt" class="!text-blue-400 !underline ml-1">Kontakt os</a>
+        <a routerLink="/contact" class="!text-white underline hover:!text-white/90 ml-1 font-medium">Kontakt os</a>
       </p>
     </div>
   </section>
