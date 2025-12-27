@@ -2,6 +2,12 @@
 nz-header {
   height: 80px;
   line-height: 80px;
+  position: relative;
+  z-index: 1000;
+}
+
+::ng-deep .ant-affix {
+  z-index: 1000 !important;
 }
 
 /* Ensure ng-zorro menu styles work properly */
