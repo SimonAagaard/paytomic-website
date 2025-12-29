@@ -39,16 +39,23 @@ export class AboutComponent {
     },
     {
       date: 'Q4 2025',
-      title: 'Early access lanceret',
+      title: 'Early access invitationer sendt',
       description: 'Vi inviterede de første danske virksomheder til at afprøve Paytomic og hjælpe med at forme produktet.',
       isPast: true
+    },
+    {
+      date: 'Q1 2026',
+      title: 'Early access lancering',
+      description: 'Early access lanceres for udvalgte virksomheder.',
+      isPast: false,
+      inProgress: true
     },
     {
       date: 'Q1 2026',
       title: 'Visma Dinero integration',
       description: 'Integration med Visma Dinero gør det nemt at synkronisere fakturaer og automatisere opfølgning.',
       isPast: false,
-      inProgress: true
+      inProgress: false
     },
     {
       date: 'Q1 2026',
