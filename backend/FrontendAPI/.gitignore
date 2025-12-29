@@ -29,6 +29,10 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+## Publish output
+publish/
+**/publish/
+
 ## Visual Studio / Rider
 .vs/
 .idea/

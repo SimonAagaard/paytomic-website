@@ -1,5 +1,7 @@
+using System.Text;
 using Serilog;
 using FrontendAPI.Services;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,10 +35,32 @@ builder.Services.AddCors(options =>
 // Register services
 builder.Services.AddScoped<IEmailService, EmailService>();
 
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "paytomic.dk",
+            ValidAudience = "paytomic.dk",
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["JwtKey"]))
+        };
+    });
+
 // Add controllers
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+// Enable CORS - MUST come before Authentication/Authorization
+app.UseCors("_myAllowSpecificOrigins");
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 var lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
 var logger = FrontendApi.Shared.LoggerFactory.Logger.CreateLogger<Program>();
@@ -52,9 +76,6 @@ lifetime.ApplicationStopped.Register(() =>
 {
     logger.LogWarning("Application has stopped at: {time}", DateTimeOffset.UtcNow);
 });
-
-// Enable CORS
-app.UseCors("_myAllowSpecificOrigins");
 
 app.UseHttpsRedirection();
 

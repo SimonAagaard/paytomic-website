@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -45,8 +46,9 @@ export class ContactComponent {
   contactForm: FormGroup;
   isSubmitting = false;
   
-  // Update this URL to match your backend
-  private apiUrl = 'http://localhost:5106/api/contact'; // Change to your Raspberry Pi URL
+  private apiUrl = environment.apiUrl;
+  private tokenUrl = `${this.apiUrl}/get-token`;
+  private contactUrl = `${this.apiUrl}/contact`;
 
   inquiryTypes = [
     { label: 'Support', value: 'support' },
@@ -101,36 +103,16 @@ export class ContactComponent {
     if (this.contactForm.valid) {
       this.isSubmitting = true;
       
-      // Map frontend values to backend model
-      const formValue = this.contactForm.value;
-      const inquiryTypeMap: { [key: string]: InquiryType } = {
-        'support': InquiryType.Support,
-        'salg': InquiryType.Sales,
-        'partnerskab': InquiryType.Partnership
-      };
-
-      const requestBody: ContactFormRequest = {
-        Email: formValue.email,
-        InquiryType: inquiryTypeMap[formValue.inquiryType],
-        Name: formValue.name,
-        CompanyName: formValue.companyName,
-        PhoneNumber: formValue.phone || '',
-        Message: formValue.message
-      };
-
-      this.http.post<{ message: string }>(this.apiUrl, requestBody).subscribe({
-        next: (response) => {
-          this.isSubmitting = false;
-          this.message.success(response.message || 'Din besked er sendt! Vi vender tilbage hurtigst muligt.');
-          this.contactForm.reset();
-          this.currentStep = 2; // Move to success step
+      // Step 1: Get JWT token first
+      this.http.post<{ token: string }>(this.tokenUrl, {}).subscribe({
+        next: (tokenResponse) => {
+          // Step 2: Use token to submit contact form
+          this.submitContactForm(tokenResponse.token);
         },
         error: (error) => {
           this.isSubmitting = false;
-          console.error('Error submitting form:', error);
-          
-          const errorMessage = 'Der opstod en fejl ved afsendelse af din besked. Prøv venligst igen senere. eller send en e-mail direkte til hello@paytomic.dk';
-          this.message.error(errorMessage);
+          console.error('Error getting token:', error);
+          this.message.error('Der opstod en fejl. Prøv venligst igen.');
         }
       });
     } else {
@@ -141,5 +123,45 @@ export class ContactComponent {
         }
       });
     }
+  }
+
+  private submitContactForm(token: string): void {
+    // Map frontend values to backend model
+    const formValue = this.contactForm.value;
+    const inquiryTypeMap: { [key: string]: InquiryType } = {
+      'support': InquiryType.Support,
+      'salg': InquiryType.Sales,
+      'partnerskab': InquiryType.Partnership
+    };
+
+    const requestBody: ContactFormRequest = {
+      Email: formValue.email,
+      InquiryType: inquiryTypeMap[formValue.inquiryType],
+      Name: formValue.name,
+      CompanyName: formValue.companyName,
+      PhoneNumber: formValue.phone || '',
+      Message: formValue.message
+    };
+
+    // Add JWT token to Authorization header
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    this.http.post<{ message: string }>(this.contactUrl, requestBody, { headers }).subscribe({
+      next: (response) => {
+        this.isSubmitting = false;
+        this.message.success(response.message || 'Din besked er sendt! Vi vender tilbage hurtigst muligt.');
+        this.contactForm.reset();
+        this.currentStep = 2; // Move to success step
+      },
+      error: (error) => {
+        this.isSubmitting = false;
+        console.error('Error submitting form:', error);
+        
+        const errorMessage = 'Der opstod en fejl ved afsendelse af din besked. Prøv venligst igen senere. eller send en e-mail direkte til hello@paytomic.dk';
+        this.message.error(errorMessage);
+      }
+    });
   }
 }
