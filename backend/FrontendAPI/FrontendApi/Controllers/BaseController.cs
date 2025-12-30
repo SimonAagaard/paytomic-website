@@ -28,27 +28,42 @@ public class BaseController : ControllerBase
     [AllowAnonymous]
     public IActionResult GetToken()
     {
-        var claims = new[]
+        try
         {
-            new Claim("scope", "anonymous.website")
-        };
+            var jwtKey = _configuration["JwtKey"];
+            if (string.IsNullOrEmpty(jwtKey))
+            {
+                _logger.LogError("JwtKey is not configured");
+                return StatusCode(500, new { error = "Server configuration error" });
+            }
 
-        var key = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
+            var claims = new[]
+            {
+                new Claim("scope", "anonymous.website")
+            };
 
-        var token = new JwtSecurityToken(
-            issuer: "paytomic.dk",
-            audience: "paytomic.dk",
-            claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(3),
-            signingCredentials: new SigningCredentials(
-                key, SecurityAlgorithms.HmacSha256)
-        );
+            var key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(jwtKey));
 
-        return Ok(new
+            var token = new JwtSecurityToken(
+                issuer: "paytomic.dk",
+                audience: "paytomic.dk",
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(3),
+                signingCredentials: new SigningCredentials(
+                    key, SecurityAlgorithms.HmacSha256)
+            );
+
+            return Ok(new
+            {
+                token = new JwtSecurityTokenHandler().WriteToken(token)
+            });
+        }
+        catch (Exception ex)
         {
-            token = new JwtSecurityTokenHandler().WriteToken(token)
-        });
+            _logger.LogError(ex, "Error generating JWT token");
+            return StatusCode(500, new { error = "Failed to generate token" });
+        }
     }
     
     [Authorize]

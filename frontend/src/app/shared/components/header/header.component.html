@@ -1,29 +1,72 @@
 <nz-affix [nzOffsetTop]="0">
-  <nz-header class="!bg-paytomic-dark px-8">
+  <nz-header class="!bg-paytomic-dark px-4 md:px-8">
     <div class="flex items-center justify-between h-full">
       <div class="flex items-center">
         <a routerLink="/" class="flex items-center no-underline hover:opacity-90 transition-opacity">
-          <img src="assets/images/with_padding.png" alt="Paytomic" class="h-20">
+          <img src="assets/images/with_padding.png" alt="Paytomic" class="h-16 md:h-20">
         </a>
       </div>
       
+      <!-- Desktop Menu -->
       <ul nz-menu 
           nzMode="horizontal" 
           nzTheme="dark"
-          class="!bg-transparent !border-0 flex-1 justify-end">
+          class="hidden md:flex !bg-transparent !border-0 flex-1">
         <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact: true}">
           <a routerLink="/om-os">Om os</a>
         </li>
         <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact: true}">
           <a routerLink="/hvordan-virker-det">Hvordan virker det?</a>
         </li>
-        <!-- <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact: true}">
-          <a routerLink="/pricing">Priser</a>
-        </li> -->
         <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact: true}">
           <a routerLink="/kontakt">Kontakt</a>
         </li>
       </ul>
+
+      <!-- Mobile Menu Button -->
+      <button 
+        class="md:hidden !text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+        (click)="openMobileMenu()"
+        aria-label="Åbn menu">
+        <nz-icon nzType="menu" nzTheme="outline" class="text-2xl"></nz-icon>
+      </button>
     </div>
   </nz-header>
 </nz-affix>
+
+<!-- Mobile Drawer Menu (Client-side only to prevent SSR hydration errors) -->
+@if (isBrowser) {
+  <nz-drawer
+    [nzVisible]="mobileMenuVisible"
+    nzClosable="false"
+    nzPlacement="right"
+    (nzOnClose)="closeMobileMenu()"
+    [nzWidth]="280">
+    <ng-container *nzDrawerContent>
+      <ul nz-menu 
+          nzMode="inline"
+          class="!text-paytomic-slate h-full !border-0">
+        <li nz-menu-item 
+            class="!h-16 !leading-[64px] !text-lg"
+            (click)="closeMobileMenu()">
+          <a routerLink="/">Hjem</a>
+        </li>
+        <li nz-menu-item 
+            class="!h-16 !leading-[64px] !text-lg"
+            (click)="closeMobileMenu()">
+          <a routerLink="/om-os">Om os</a>
+        </li>
+        <li nz-menu-item 
+            class="!h-16 !leading-[64px] !text-lg"
+            (click)="closeMobileMenu()">
+          <a routerLink="/hvordan-virker-det">Hvordan virker det?</a>
+        </li>
+        <li nz-menu-item 
+            class="!h-16 !leading-[64px] !text-lg"
+            (click)="closeMobileMenu()">
+          <a routerLink="/kontakt">Kontakt</a>
+        </li>
+      </ul>
+    </ng-container>
+  </nz-drawer>
+}

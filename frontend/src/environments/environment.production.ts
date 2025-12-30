@@ -2,5 +2,5 @@
 // This file is used in production builds
 export const environment = {
   production: true,
-  apiUrl: 'https://paytomic.dk/api/'
+  apiUrl: 'https://paytomic.dk/api'
 };

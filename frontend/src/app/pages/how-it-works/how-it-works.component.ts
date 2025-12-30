@@ -25,7 +25,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
   styleUrls: ['./how-it-works.component.css']
 })
 export class HowItWorksComponent implements OnInit, OnDestroy {
-  email = 'kontakt@paytomic.com';
+  email = 'kontakt@paytomic.dk';
 
   accountingSystems = [
     {

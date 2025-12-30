@@ -28,7 +28,8 @@ public class ContactFormRequestModel
 public enum InquiryType
 {
     Support,
-    Sales,
+    EarlyAccess,
+    // Sales,
     Partnership
 }
 

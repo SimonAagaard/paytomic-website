@@ -6,11 +6,23 @@
     </div>
 
     <div class="bg-white rounded-lg shadow-lg p-8">
-      <nz-steps [nzCurrent]="currentStep" class="mb-8">
-        <nz-step nzTitle="Henvendelse"></nz-step>
-        <nz-step nzTitle="Dine oplysninger"></nz-step>
-        <nz-step nzTitle="Færdig"></nz-step>
-      </nz-steps>
+      <!-- Desktop steps with titles -->
+      <div class="hidden md:block mb-8">
+        <nz-steps [nzCurrent]="currentStep">
+          <nz-step nzTitle="Henvendelse"></nz-step>
+          <nz-step nzTitle="Dine oplysninger"></nz-step>
+          <nz-step nzTitle="Færdig"></nz-step>
+        </nz-steps>
+      </div>
+      
+      <!-- Mobile steps without titles -->
+      <div class="block md:hidden mb-8">
+        <nz-steps [nzCurrent]="currentStep">
+          <nz-step></nz-step>
+          <nz-step></nz-step>
+          <nz-step></nz-step>
+        </nz-steps>
+      </div>
 
       <form nz-form [formGroup]="contactForm" [nzLayout]="'vertical'">
         <!-- Step 1: Initial Inquiry -->

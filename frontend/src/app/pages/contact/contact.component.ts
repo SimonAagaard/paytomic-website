@@ -51,8 +51,9 @@ export class ContactComponent {
   private contactUrl = `${this.apiUrl}/contact`;
 
   inquiryTypes = [
+    { label: 'Early access', value: 'earlyAccess' },
     { label: 'Support', value: 'support' },
-    { label: 'Salg', value: 'sales' },
+    // { label: 'Salg', value: 'sales' },
     { label: 'Partnerskab', value: 'partnership' }
   ];
 

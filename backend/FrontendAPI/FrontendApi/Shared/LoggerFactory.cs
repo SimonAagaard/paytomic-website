@@ -9,6 +9,7 @@ public static class LoggerFactory
     static LoggerFactory()
     {
         Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()  // Log everything (Debug and above)
             .WriteTo.Console()
             .WriteTo.File("logs/app-log.txt")
             .CreateLogger();
