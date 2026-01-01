@@ -71,6 +71,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "allowedHosts": ["paytomic.local"]
+          },
           "configurations": {
             "production": {
               "buildTarget": "paytomic-website:build:production"
