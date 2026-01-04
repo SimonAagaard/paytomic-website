@@ -34,6 +34,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/cookies/cookies.component').then(m => m.CookiesComponent)
   },
   {
+    path: 'tilmeld',
+    loadComponent: () => import('./pages/signup/signup.component').then(m => m.SignupComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

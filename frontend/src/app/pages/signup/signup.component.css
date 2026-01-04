@@ -1,0 +1,352 @@
+.signup-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #F2F4E8 0%, #ffffff 50%, #F2F4E8 100%);
+}
+
+.signup-card {
+  background: white;
+  border-radius: 12px;
+  padding: 3rem;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.signup-card h1 {
+  text-align: center;
+  margin: 0 0 0.5rem 0;
+  color: #1a1a1a;
+  font-size: 2rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.steps-container {
+  margin-bottom: 3rem;
+}
+
+.signup-form {
+  margin-top: 2rem;
+}
+
+.step-content {
+  min-height: 400px;
+}
+
+.step-content h2 {
+  margin: 0 0 0.5rem 0;
+  color: #1a1a1a;
+}
+
+.step-description {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* Pricing Cards */
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.pricing-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid #e8e8e8;
+  position: relative;
+  overflow: visible;
+  border-radius: 12px;
+  background: white;
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(45, 60, 69, 0.15);
+}
+
+.pricing-card.selected {
+  border-color: #8FA99B;
+  box-shadow: 0 4px 14px rgba(143, 169, 155, 0.3);
+  background: linear-gradient(to bottom, #F2F4E8 0%, white 100%);
+}
+
+.pricing-card.popular {
+  border-color: #8FA99B;
+}
+
+.pricing-card.limited {
+  border-color: #8FA99B;
+  background: linear-gradient(to bottom, #F2F4E8 0%, white 100%);
+  border-width: 3px;
+}
+
+/* Card checkmark styling */
+.card-checkmark {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  font-size: 28px;
+  color: #8FA99B;
+  animation: checkmarkAppear 0.3s ease-out;
+}
+
+@keyframes checkmarkAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.popular-badge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: #8FA99B;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.limited-badge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: #415764;
+  color: #F2F4E8;
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(65, 87, 100, 0.3);
+  animation: pulse-subtle 2s infinite;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(65, 87, 100, 0.3);
+  }
+  50% {
+    box-shadow: 0 2px 12px rgba(65, 87, 100, 0.4);
+  }
+}
+
+.slots-remaining {
+  background: linear-gradient(135deg, #F2F4E8 0%, #e8ebe0 100%);
+  border: 2px solid #8FA99B;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #415764;
+  font-size: 0.9rem;
+}
+
+.slots-remaining i {
+  font-size: 1.2rem;
+  color: #8FA99B;
+}
+
+.slots-remaining strong {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2D3C45;
+}
+
+.price {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #2D3C45;
+  margin: 1rem 0;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0 0;
+}
+
+.features li {
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #555;
+}
+
+.features li i {
+  color: #8FA99B;
+  font-size: 1.1rem;
+}
+
+/* Login Methods */
+.login-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.login-method-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid #e8e8e8;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.login-method-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(45, 60, 69, 0.1);
+}
+
+.login-method-card.selected {
+  border-color: #8FA99B;
+  background: #F2F4E8;
+  box-shadow: 0 4px 14px rgba(143, 169, 155, 0.2);
+}
+
+.method-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.method-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+}
+
+.method-icon {
+  font-size: 2rem;
+  color: #8FA99B;
+}
+
+.method-icon-svg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.method-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.login-method-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.credentials-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #F2F4E8;
+  border-radius: 12px;
+  border: 1px solid #e8ebe0;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e8e8e8;
+}
+
+.form-actions button {
+  min-width: 120px;
+  border-radius: 8px;
+}
+
+/* Primary buttons styling */
+::ng-deep .signup-form button[nz-button].ant-btn-primary {
+  background: #8FA99B;
+  border-color: #8FA99B;
+  box-shadow: 0 2px 8px rgba(143, 169, 155, 0.3);
+}
+
+::ng-deep .signup-form button[nz-button].ant-btn-primary:hover:not(:disabled) {
+  background: #7A9388;
+  border-color: #7A9388;
+  box-shadow: 0 4px 12px rgba(143, 169, 155, 0.4);
+}
+
+::ng-deep .signup-form button[nz-button].ant-btn-primary:active:not(:disabled) {
+  background: #6A8378;
+  border-color: #6A8378;
+}
+
+/* Login Link */
+.login-link {
+  text-align: center;
+  margin-top: 2rem;
+  color: #666;
+}
+
+.login-link a {
+  color: #8FA99B;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link a:hover {
+  color: #7A9388;
+  text-decoration: underline;
+}
+
+/* Form Items */
+nz-form-item {
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .signup-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .pricing-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .login-methods {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+}

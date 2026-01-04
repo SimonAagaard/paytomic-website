@@ -23,6 +23,27 @@
         </li>
       </ul>
 
+      <!-- Signup Button (Desktop) -->
+      <div class="hidden md:block ml-4">
+        <a routerLink="/tilmeld">
+          <button 
+            nz-button 
+            nzType="primary"
+            nzSize="large"
+            nzShape="round"
+            style="background: #8FA99B;"
+            onmouseover="this.style.background='#7A9388'; this.style.boxShadow='0 4px 12px rgba(143, 169, 155, 0.4)'"
+            onmouseout="this.style.background='#8FA99B'; this.style.boxShadow='0 2px 8px rgba(143, 169, 155, 0.3)'">
+            <span>
+<nz-icon nzType="user-add" class="mr-1"></nz-icon>
+    
+            Tilmeld dig
+            </span>
+         
+          </button>
+        </a>
+      </div>
+
       <!-- Mobile Menu Button -->
       <button 
         class="md:hidden !text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
@@ -65,6 +86,18 @@
             class="!h-16 !leading-[64px] !text-lg"
             (click)="closeMobileMenu()">
           <a routerLink="/kontakt">Kontakt</a>
+        </li>
+        <li class="px-4 py-4">
+          <a routerLink="/tilmeld" (click)="closeMobileMenu()" class="block">
+            <button 
+              nz-button 
+              nzType="primary" 
+              class="w-full"
+              style="background: #8FA99B; border: none; border-radius: 8px; font-weight: 600; box-shadow: 0 2px 8px rgba(143, 169, 155, 0.3); padding: 10px 16px; height: auto;">
+              <i nz-icon nzType="user-add" class="mr-1"></i>
+              Tilmeld dig
+            </button>
+          </a>
         </li>
       </ul>
     </ng-container>

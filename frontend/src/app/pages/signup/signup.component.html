@@ -1,0 +1,237 @@
+<div class="signup-container">
+  <div class="signup-card">
+    <h1>Opret din konto</h1>
+    <p class="subtitle">Kom i gang med Paytomic på få minutter</p>
+
+    <!-- Steps Progress -->
+    <nz-steps [nzCurrent]="currentStep" class="steps-container">
+      <nz-step nzTitle="Vælg plan"></nz-step>
+      <nz-step nzTitle="Grundlæggende info"></nz-step>
+      <nz-step nzTitle="Login metode"></nz-step>
+    </nz-steps>
+
+    <form [formGroup]="signupForm" class="signup-form">
+      <!-- Step 1: Choose Pricing Plan -->
+      <div *ngIf="currentStep === 0" class="step-content">
+        <h2>Vælg din prisplan</h2>
+        <p class="step-description">
+          Vælg den plan der passer bedst til dine behov. Du kan altid opgradere senere.
+        </p>
+
+        <div class="pricing-cards">
+          <nz-card
+            *ngFor="let plan of pricingPlans"
+            [nzTitle]="plan.name"
+            class="pricing-card"
+            [class.selected]="signupForm.get('pricingPlan')?.value === plan.value"
+            [class.limited]="plan.limited"
+            (click)="selectPlan(plan.value)"
+          >
+            <!-- Selected checkmark -->
+            <div class="card-checkmark" *ngIf="signupForm.get('pricingPlan')?.value === plan.value">
+              <i nz-icon nzType="check-circle" nzTheme="fill"></i>
+            </div>
+
+            <div class="limited-badge" *ngIf="plan.limited">
+              <span>{{ plan.badge }}</span>
+            </div>
+            <div class="price">{{ plan.price }}</div>
+
+            <!-- Limited slots indicator for Early Access -->
+            <div class="slots-remaining" *ngIf="plan.limited">
+              <i nz-icon nzType="fire" nzTheme="fill"></i>
+              <strong>{{ earlyAccessSlotsRemaining }}</strong> ud af
+              {{ totalEarlyAccessSlots }} pladser tilbage
+            </div>
+
+            <ul class="features">
+              <li *ngFor="let feature of plan.features">
+                <i nz-icon nzType="check-circle" nzTheme="fill"></i>
+                {{ feature }}
+              </li>
+            </ul>
+          </nz-card>
+        </div>
+      </div>
+
+      <!-- Step 2: Basic Information -->
+      <div *ngIf="currentStep === 2" class="step-content">
+        <h2>Grundlæggende information</h2>
+        <p class="step-description">Fortæl os lidt om dig og din virksomhed</p>
+
+        <nz-form-item>
+          <nz-form-label nzRequired>Fulde navn</nz-form-label>
+          <nz-form-control nzErrorTip="Indtast venligst dit fulde navn">
+            <input nz-input formControlName="fullName" placeholder="Fornavn Efternavn" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzRequired>Telefonnummer</nz-form-label>
+          <nz-form-control nzErrorTip="Indtast venligst dit telefonnummer">
+            <input nz-input formControlName="phone" placeholder="+45 12 34 56 78" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzRequired>Virksomhedsnavn</nz-form-label>
+          <nz-form-control nzErrorTip="Indtast venligst dit virksomhedsnavn">
+            <input nz-input formControlName="companyName" placeholder="Din Virksomhed ApS" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzRequired>CVR</nz-form-label>
+          <nz-form-control nzErrorTip="Indtast venligst din virksomheds CVR">
+            <input nz-input formControlName="vat" placeholder="12345678" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- Honeypot field (hidden from users) -->
+        <div style="display: none">
+          <input formControlName="website" type="text" name="website" />
+        </div>
+      </div>
+
+      <!-- Step 3: Choose Login Method -->
+      <div *ngIf="currentStep === 1" class="step-content">
+        <h2>Vælg login metode</h2>
+        <p class="step-description">Hvordan vil du helst logge ind fremover?</p>
+
+        <div class="login-methods">
+          <nz-card
+            *ngFor="let method of loginMethods"
+            class="login-method-card"
+            [class.selected]="signupForm.get('loginMethod')?.value === method.value"
+            (click)="selectLoginMethod(method.value)"
+          >
+            <!-- Selected checkmark -->
+            <div
+              class="card-checkmark"
+              *ngIf="signupForm.get('loginMethod')?.value === method.value"
+            >
+              <i nz-icon nzType="check-circle" nzTheme="fill"></i>
+            </div>
+
+            <div class="method-header">
+              <div class="method-icon-wrapper">
+                <!-- Email icon -->
+                <i *ngIf="method.icon === 'mail'" nz-icon nzType="mail" class="method-icon"></i>
+
+                <!-- Google icon -->
+                <svg
+                  *ngIf="method.icon === 'google'"
+                  class="method-icon-svg"
+                  viewBox="0 0 24 24"
+                  width="40"
+                  height="40"
+                >
+                  <path
+                    fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  />
+                </svg>
+
+                <!-- Microsoft icon -->
+                <svg
+                  *ngIf="method.icon === 'microsoft'"
+                  class="method-icon-svg"
+                  viewBox="0 0 24 24"
+                  width="40"
+                  height="40"
+                >
+                  <path fill="#f25022" d="M1 1h10v10H1z" />
+                  <path fill="#00a4ef" d="M13 1h10v10H13z" />
+                  <path fill="#7fba00" d="M1 13h10v10H1z" />
+                  <path fill="#ffb900" d="M13 13h10v10H13z" />
+                </svg>
+              </div>
+              <h3>{{ method.name }}</h3>
+            </div>
+            <p>{{ method.description }}</p>
+          </nz-card>
+        </div>
+
+        <div class="credentials-section">
+          <nz-form-item>
+            <nz-form-label nzRequired>Email</nz-form-label>
+            <nz-form-control nzErrorTip="Indtast venligst en gyldig email">
+              <input nz-input formControlName="email" type="email" placeholder="din@email.dk" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <div *ngIf="signupForm.get('loginMethod')?.value === LoginMethod.Basic">
+            <nz-form-item>
+              <nz-form-label nzRequired>Adgangskode</nz-form-label>
+              <nz-form-control nzErrorTip="Adgangskode skal være mindst 8 tegn">
+                <input
+                  nz-input
+                  formControlName="password"
+                  type="password"
+                  placeholder="Mindst 8 tegn"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label nzRequired>Bekræft adgangskode</nz-form-label>
+              <nz-form-control nzErrorTip="Adgangskoderne skal matche">
+                <input
+                  nz-input
+                  formControlName="confirmPassword"
+                  type="password"
+                  placeholder="Indtast adgangskode igen"
+                />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="form-actions">
+        <button
+          *ngIf="currentStep > 0"
+          nz-button
+          nzType="default"
+          (click)="prevStep()"
+          [disabled]="isSubmitting"
+        >
+          <i nz-icon nzType="left"></i>
+          Tilbage
+        </button>
+
+        <button *ngIf="currentStep < 2" nz-button nzType="primary" (click)="nextStep()">
+          Næste
+          <i nz-icon nzType="right"></i>
+        </button>
+
+        <button
+          *ngIf="currentStep === 2"
+          nz-button
+          nzType="primary"
+          (click)="submitForm()"
+          [nzLoading]="isSubmitting"
+          [disabled]="isSubmitting"
+        >
+          <i nz-icon nzType="check"></i>
+          Opret konto
+        </button>
+      </div>
+    </form>
+
+    <div class="login-link">Har du allerede en konto? <a routerLink="/login">Log ind her</a></div>
+  </div>
+</div>

@@ -139,3 +139,5 @@ StyleCopReport.xml
 **/*.GlobalUsings.g.cs
 **/rider.project.model.nuget.info
 **/rider.project.restore.info
+
+.prettierrc

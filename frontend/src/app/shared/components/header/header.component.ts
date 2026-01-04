@@ -6,6 +6,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzAffixModule } from 'ng-zorro-antd/affix';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzButtonComponent } from "ng-zorro-antd/button";
 
 @Component({
   selector: 'app-header',
@@ -18,8 +19,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzMenuModule,
     NzAffixModule,
     NzDrawerModule,
-    NzIconModule
-  ],
+    NzIconModule,
+    NzButtonComponent
+],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
