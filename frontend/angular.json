@@ -72,7 +72,7 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "allowedHosts": ["paytomic.local"]
+            "allowedHosts": ["paytomic.dev"]
           },
           "configurations": {
             "production": {

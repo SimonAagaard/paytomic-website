@@ -89,7 +89,7 @@
             <button nz-button nzSize="large" (click)="prevStep()" class="px-8">
               Tilbage
             </button>
-            <button nz-button nzType="primary" nzSize="large" (click)="submitForm()" class="px-8">
+            <button nz-button nzType="primary" nzSize="large" [nzLoading]="isSubmitting" (click)="submitForm()" class="px-8">
               Send besked
             </button>
           </div>

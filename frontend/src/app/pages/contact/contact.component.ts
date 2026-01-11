@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
@@ -8,6 +8,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 enum InquiryType {
@@ -36,7 +37,8 @@ interface ContactFormRequest {
     NzFormModule,
     NzInputModule,
     NzSelectModule,
-    NzButtonModule
+    NzButtonModule,
+    NzIconModule
   ],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
@@ -46,9 +48,8 @@ export class ContactComponent {
   contactForm: FormGroup;
   isSubmitting = false;
   
-  private apiUrl = environment.apiUrl;
-  private tokenUrl = `${this.apiUrl}/get-token`;
-  private contactUrl = `${this.apiUrl}/contact`;
+  private apiUrl = environment.appApiUrl;
+  private contactUrl = `${this.apiUrl}/website/contact`;
 
   inquiryTypes = [
     { label: 'Early access', value: 'earlyAccess' },
@@ -60,7 +61,8 @@ export class ContactComponent {
   constructor(
     private fb: FormBuilder,
     private message: NzMessageService,
-    private http: HttpClient
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef
   ) {
     this.contactForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -102,19 +104,9 @@ export class ContactComponent {
     }
 
     if (this.contactForm.valid) {
-      this.isSubmitting = true;
-      
-      // Step 1: Get JWT token first
-      this.http.post<{ token: string }>(this.tokenUrl, {}).subscribe({
-        next: (tokenResponse) => {
-          // Step 2: Use token to submit contact form
-          this.submitContactForm(tokenResponse.token);
-        },
-        error: (error) => {
-          this.isSubmitting = false;
-          console.error('Error getting token:', error);
-          this.message.error('Der opstod en fejl. Prøv venligst igen.');
-        }
+      setTimeout(() => {
+        this.isSubmitting = true;
+            this.submitContactForm();
       });
     } else {
       Object.values(this.contactForm.controls).forEach(control => {
@@ -126,7 +118,7 @@ export class ContactComponent {
     }
   }
 
-  private submitContactForm(token: string): void {
+  private submitContactForm(): void {
     // Map frontend values to backend model
     const formValue = this.contactForm.value;
     const inquiryTypeMap: { [key: string]: InquiryType } = {
@@ -144,15 +136,10 @@ export class ContactComponent {
       Message: formValue.message
     };
 
-    // Add JWT token to Authorization header
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
-    this.http.post<{ message: string }>(this.contactUrl, requestBody, { headers }).subscribe({
+    this.http.post<{ message: string }>(this.contactUrl, requestBody).subscribe({
       next: (response) => {
         this.isSubmitting = false;
-        this.message.success(response.message || 'Din besked er sendt! Vi vender tilbage hurtigst muligt.');
+        this.message.success('Din besked er sendt! Vi vender tilbage hurtigst muligt.');
         this.contactForm.reset();
         this.currentStep = 2; // Move to success step
       },

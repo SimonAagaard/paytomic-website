@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
@@ -15,11 +15,12 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { BehaviorSubject } from 'rxjs';
 
 enum PricingPlan {
-  EarlyAccess = 0,
-  Professional = 1,
-  Enterprise = 2,
+  Essential = 0,
+  EarlyAccess = 1,
+  Pro = 2,
 }
 
 enum LoginMethod {
@@ -37,6 +38,7 @@ interface SignupRequest {
   PricingPlan: PricingPlan;
   PreferredLoginMethod: LoginMethod;
   OAuthToken?: string | null;
+  Vat: string;
 }
 
 @Component({
@@ -59,34 +61,64 @@ interface SignupRequest {
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   currentStep = 0;
   signupForm: FormGroup;
   isSubmitting = false;
 
-  private apiUrl = environment.apiUrl;
-  private signupUrl = `${this.apiUrl}/signup`;
+  private signupUrl = `${environment.appApiUrl}/auth/signup`;
 
   PricingPlan = PricingPlan;
   LoginMethod = LoginMethod;
 
   // Early Access limited slots
-  readonly totalEarlyAccessSlots = 5;
-  earlyAccessSlotsRemaining = 5; // TODO: Fetch from backend
+  earlyAccessSlotsRemaining: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  isEarlyAccessAvailable: boolean = false;
+
+  // Password requirements
+  passwordRequirements = [
+    { label: 'Mindst 8 tegn', met: false },
+    { label: 'Mindst ét stort bogstav', met: false },
+    { label: 'Mindst ét specialtegn (!@#$%^&*)', met: false },
+  ];
 
   pricingPlans = [
     {
+      value: PricingPlan.Essential,
+      name: 'Essential',
+      price: 'Kommer snart',
+      features: [
+        'Perfekt til små virksomheder',
+        'Grundlæggende funktioner',
+        'Email support',
+        'Månedlig fakturering',
+      ],
+      comingSoon: true,
+    },
+    {
       value: PricingPlan.EarlyAccess,
-      name: 'Early Access',
+      name: 'Lifetime Early Access',
       price: '0 kr/md',
       features: [
         'Ingen kreditkort påkrævet',
         'Tidlig adgang til paytomic',
         'Mulighed via feedback at påvirke fremtidige funktioner',
-        '1 bruger',
+        'Forbliver gratis for livstid',
       ],
       limited: true,
       badge: 'Begrænset antal pladser',
+    },
+    {
+      value: PricingPlan.Pro,
+      name: 'Pro',
+      price: 'Kommer snart',
+      features: [
+        'Alt i Essential',
+        'Avancerede funktioner',
+        'Prioriteret support',
+        'Ubegrænsede brugere',
+      ],
+      comingSoon: true,
     },
   ];
 
@@ -116,7 +148,9 @@ export class SignupComponent {
     private message: NzMessageService,
     private http: HttpClient,
     private router: Router,
-    private sanitizer: DomSanitizer
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
+    private cdr: ChangeDetectorRef
   ) {
     this.signupForm = this.fb.group({
       // Step 1: Pricing Plan
@@ -144,8 +178,16 @@ export class SignupComponent {
       const confirmPasswordControl = this.signupForm.get('confirmPassword');
 
       if (method === LoginMethod.Basic) {
-        passwordControl?.setValidators([Validators.required, Validators.minLength(8)]);
-        confirmPasswordControl?.setValidators([Validators.required]);
+        passwordControl?.setValidators([
+          Validators.required,
+          Validators.minLength(8),
+          this.uppercaseValidator(),
+          this.specialCharValidator(),
+        ]);
+        confirmPasswordControl?.setValidators([
+          Validators.required,
+          this.passwordMatchValidator()
+        ]);
       } else {
         passwordControl?.clearValidators();
         confirmPasswordControl?.clearValidators();
@@ -154,6 +196,70 @@ export class SignupComponent {
       passwordControl?.updateValueAndValidity();
       confirmPasswordControl?.updateValueAndValidity();
     });
+
+    // Watch password changes to update requirements and revalidate confirm password
+    this.signupForm.get('password')?.valueChanges.subscribe((password) => {
+      this.updatePasswordRequirements(password || '');
+      // Revalidate confirm password when password changes
+      this.signupForm.get('confirmPassword')?.updateValueAndValidity({ emitEvent: false });
+    });
+  }
+
+  private updatePasswordRequirements(password: string): void {
+    this.passwordRequirements = [
+      { label: 'Mindst 8 tegn', met: password.length >= 8 },
+      { label: 'Mindst ét stort bogstav', met: /[A-Z]/.test(password) },
+      { label: 'Mindst ét specialtegn (!@#$%^&*)', met: /[!@#$%^&*(),.?":{}|<>]/.test(password) },
+    ];
+  }
+
+  ngOnInit(): void {
+    this.signupForm.patchValue({ pricingPlan: PricingPlan.EarlyAccess });
+    this.signupForm.patchValue({ loginMethod: LoginMethod.Basic });
+
+    // Fetch available early access slots
+    this.fetchEarlyAccessSlots();
+
+    // Check for error messages in query parameters (from OAuth redirects)
+    this.route.queryParams.subscribe((params) => {
+      if (params['error']) {
+        const errorMessage = params['message'] || this.getDefaultErrorMessage(params['error']);
+        this.message.error(errorMessage, { nzDuration: 8000 });
+
+        // Clean up URL by removing query parameters
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: {},
+          replaceUrl: true,
+        });
+      }
+    });
+  }
+
+  private getDefaultErrorMessage(errorType: string): string {
+    const errorMessages: { [key: string]: string } = {
+      account_exists: 'En konto med denne email eksisterer allerede. Log venligst ind.',
+      oauth_failed: 'OAuth login fejlede. Prøv venligst igen.',
+      invalid_token: 'Ugyldig token. Prøv venligst igen.',
+    };
+    return errorMessages[errorType] || 'Der opstod en fejl. Prøv venligst igen.';
+  }
+
+  private fetchEarlyAccessSlots(): void {
+    this.http.get<number>(`${environment.appApiUrl}/tenant/early-access/available-spots`)
+      .subscribe({
+        next: (availableSpots) => {
+          this.earlyAccessSlotsRemaining.next(availableSpots);
+          this.isEarlyAccessAvailable = availableSpots > 0;
+          this.cdr.detectChanges();
+        },
+        error: (error) => {
+          console.error('Error fetching early access slots:', error);
+          // Keep the default value of 0 on error
+          this.isEarlyAccessAvailable = false;
+          this.cdr.detectChanges();
+        }
+      });
   }
 
   nextStep(): void {
@@ -166,39 +272,23 @@ export class SignupComponent {
         return;
       }
     } else if (this.currentStep === 1) {
-      // Validate login method and credentials
-      const loginMethod = this.signupForm.get('loginMethod')?.value;
-      const email = this.signupForm.get('email');
-      const password = this.signupForm.get('password');
-      const confirmPassword = this.signupForm.get('confirmPassword');
+      // Validate basic info fields
+      const fullName = this.signupForm.get('fullName');
+      const phone = this.signupForm.get('phone');
+      const companyName = this.signupForm.get('companyName');
+      const vat = this.signupForm.get('vat');
 
-      if (!loginMethod) {
-        this.message.error('Vælg venligst en login metode');
+      if (fullName?.invalid || phone?.invalid || companyName?.invalid || vat?.invalid) {
+        [fullName, phone, companyName, vat].forEach((control) => {
+          if (control?.invalid) {
+            control.markAsDirty();
+            control.updateValueAndValidity();
+          }
+        });
+        this.message.error('Udfyld venligst alle påkrævede felter');
         return;
       }
-
-      if (email?.invalid) {
-        email.markAsDirty();
-        email.updateValueAndValidity();
-        this.message.error('Indtast venligst en gyldig email');
-        return;
-      }
-
-      if (loginMethod === LoginMethod.Basic) {
-        if (password?.invalid) {
-          password.markAsDirty();
-          password.updateValueAndValidity();
-          this.message.error('Adgangskode skal være mindst 8 tegn');
-          return;
-        }
-
-        if (password?.value !== confirmPassword?.value) {
-          confirmPassword?.markAsDirty();
-          this.message.error('Adgangskoderne matcher ikke');
-          return;
-        }
-      }
-    }
+    } 
 
     this.currentStep++;
   }
@@ -214,26 +304,32 @@ export class SignupComponent {
       return;
     }
 
-    // Validate final step
-    const fullName = this.signupForm.get('fullName');
-    const phone = this.signupForm.get('phone');
-    const companyName = this.signupForm.get('companyName');
+    const loginMethod = this.signupForm.get('loginMethod')?.value;
 
-    if (fullName?.invalid || phone?.invalid || companyName?.invalid) {
-      [fullName, phone, companyName].forEach((control) => {
-        if (control?.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity();
-        }
-      });
-      this.message.error('Udfyld venligst alle påkrævede felter');
-      return;
+    if (loginMethod == LoginMethod.Basic) {
+      // Final validation for basic auth
+      const email = this.signupForm.get('email');
+      const password = this.signupForm.get('password');
+      const confirmPassword = this.signupForm.get('confirmPassword');
+
+
+      if (email?.invalid || password?.invalid || password?.value !== confirmPassword?.value) {
+        [email, password, confirmPassword].forEach((control) => {
+          if (control?.invalid) {
+            control.markAsDirty();
+            control.updateValueAndValidity();
+          }
+        });
+        this.message.error('Tjek venligst dine login oplysninger');
+        return;
+      }
     }
+
 
     this.isSubmitting = true;
 
     try {
-      const loginMethod = this.signupForm.get('loginMethod')?.value;
+      
 
       // Handle OAuth signup
       if (loginMethod === LoginMethod.Google || loginMethod === LoginMethod.Microsoft) {
@@ -250,6 +346,7 @@ export class SignupComponent {
         CompanyName: this.signupForm.get('companyName')?.value,
         PricingPlan: this.signupForm.get('pricingPlan')?.value,
         PreferredLoginMethod: loginMethod,
+        Vat: this.signupForm.get('vat')?.value,
       };
 
       const response = await this.http.post(this.signupUrl, signupRequest).toPromise();
@@ -273,6 +370,7 @@ export class SignupComponent {
       }
     } finally {
       this.isSubmitting = false;
+      this.cdr.detectChanges();
     }
   }
 
@@ -288,24 +386,74 @@ export class SignupComponent {
       phone: this.signupForm.get('phone')?.value,
       companyName: this.signupForm.get('companyName')?.value,
       pricingPlan: this.signupForm.get('pricingPlan')?.value,
+      vat: this.signupForm.get('vat')?.value,
       loginMethod: loginMethod,
     };
 
     sessionStorage.setItem('signupFormData', JSON.stringify(formData));
 
-    // TODO: Implement OAuth flow
-    // This would typically redirect to the OAuth provider's authorization URL
-    // window.location.href = `${this.apiUrl}/oauth/${provider}/authorize`;
-
-    this.message.warning('OAuth integration er ikke implementeret endnu');
     this.isSubmitting = false;
+    this.cdr.detectChanges();
+  }
+
+  private uppercaseValidator() {
+    return (control: any) => {
+      const value = control.value || '';
+      return /[A-Z]/.test(value) ? null : { uppercase: true };
+    };
+  }
+
+  private specialCharValidator() {
+    return (control: any) => {
+      const value = control.value || '';
+      return /[!@#$%^&*(),.?":{}|<>]/.test(value) ? null : { specialChar: true };
+    };
+  }
+
+  private passwordMatchValidator() {
+    return (control: any) => {
+      if (!control.parent) {
+        return null;
+      }
+      const password = control.parent.get('password')?.value;
+      const confirmPassword = control.value;
+      return password === confirmPassword ? null : { passwordMismatch: true };
+    };
+  }
+
+  getConfirmPasswordError(): string {
+    const control = this.signupForm.get('confirmPassword');
+    if (control?.hasError('required') && control?.dirty) {
+      return 'Bekræft venligst din adgangskode';
+    }
+    if (control?.hasError('passwordMismatch') && control?.dirty) {
+      return 'Adgangskoderne matcher ikke';
+    }
+    return '';
   }
 
   selectPlan(plan: PricingPlan): void {
+    // Prevent selecting Early Access if no slots available
+    if (plan === PricingPlan.EarlyAccess && !this.isEarlyAccessAvailable) {
+      this.message.warning('Early Access pladser er desværre optaget');
+      return;
+    }
     this.signupForm.patchValue({ pricingPlan: plan });
   }
 
   selectLoginMethod(method: LoginMethod): void {
     this.signupForm.patchValue({ loginMethod: method });
+
+    if (method == LoginMethod.Google || method == LoginMethod.Microsoft) {
+      const params = new URLSearchParams({
+        companyName: this.signupForm.get('companyName')?.value,
+        phone: this.signupForm.get('phone')?.value,
+        vat: this.signupForm.get('vat')?.value,
+        pricingPlan: this.signupForm.get('pricingPlan')?.value,
+        provider: method.toString(),
+      }).toString();
+
+      window.location.href = environment.appApiUrl + `/auth/oauth/signup?${params}`;
+    }
   }
 }

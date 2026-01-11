@@ -46,7 +46,10 @@ import {
   UpOutline,
   DownOutline,
   EyeTwoTone,
-  ToolTwoTone
+  ToolTwoTone,
+  IdcardOutline,
+  BankOutline,
+  UserOutline
 } from '@ant-design/icons-angular/icons';
 
 import { routes } from './app.routes';
@@ -101,7 +104,10 @@ export const appConfig: ApplicationConfig = {
       UpOutline,
       DownOutline,
       EyeTwoTone,
-      ToolTwoTone
+      ToolTwoTone,
+      IdcardOutline,
+      BankOutline,
+      UserOutline
     ]), provideClientHydration(withEventReplay())
   ]
 };

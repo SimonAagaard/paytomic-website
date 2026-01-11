@@ -39,8 +39,8 @@ export class AboutComponent {
     },
     {
       date: 'Q4 2025',
-      title: 'Early access invitationer sendt',
-      description: 'Vi inviterede de første danske virksomheder til at afprøve Paytomic og hjælpe med at forme produktet.',
+      title: 'Early access signup åbnet',
+      description: 'Signup til early access blev åbnet for danske virksomheder.',
       isPast: true
     },
     {
