@@ -7,6 +7,7 @@ import { NzAffixModule } from 'ng-zorro-antd/affix';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonComponent } from "ng-zorro-antd/button";
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -29,6 +30,7 @@ export class HeaderComponent {
   private platformId = inject(PLATFORM_ID);
   isBrowser = isPlatformBrowser(this.platformId);
   mobileMenuVisible = false;
+  appLoginUrl = environment.appLoginUrl;
 
   openMobileMenu(): void {
     this.mobileMenuVisible = true;

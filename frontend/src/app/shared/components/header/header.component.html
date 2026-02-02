@@ -23,8 +23,23 @@
         </li>
       </ul>
 
-      <!-- Signup Button (Desktop) -->
-      <div class="hidden md:block ml-4">
+      <!-- Login and Signup Buttons (Desktop) -->
+      <div class="hidden md:flex items-center gap-3 ml-4">
+        <a [href]="appLoginUrl" target="_blank" rel="noopener noreferrer">
+          <button 
+            nz-button 
+            nzType="default"
+            nzSize="large"
+            nzShape="round"
+            style="background: transparent; border: 2px solid #F2F4E8; color: #F2F4E8;"
+            onmouseover="this.style.background='rgba(242, 244, 232, 0.1)'; this.style.boxShadow='0 4px 12px rgba(242, 244, 232, 0.2)'"
+            onmouseout="this.style.background='transparent'; this.style.boxShadow='none'">
+            <span>
+              <nz-icon nzType="login" class="mr-1"></nz-icon>
+              Log ind
+            </span>
+          </button>
+        </a>
         <a routerLink="/tilmeld">
           <button 
             nz-button 
@@ -35,11 +50,9 @@
             onmouseover="this.style.background='#7A9388'; this.style.boxShadow='0 4px 12px rgba(143, 169, 155, 0.4)'"
             onmouseout="this.style.background='#8FA99B'; this.style.boxShadow='0 2px 8px rgba(143, 169, 155, 0.3)'">
             <span>
-<nz-icon nzType="user-add" class="mr-1"></nz-icon>
-    
-            Tilmeld dig
+              <nz-icon nzType="user-add" class="mr-1"></nz-icon>
+              Tilmeld dig
             </span>
-         
           </button>
         </a>
       </div>
@@ -87,7 +100,19 @@
             (click)="closeMobileMenu()">
           <a routerLink="/kontakt">Kontakt</a>
         </li>
-        <li class="px-4 py-4">
+        <li class="px-4 py-3">
+          <a [href]="appLoginUrl" target="_blank" rel="noopener noreferrer" (click)="closeMobileMenu()" class="block">
+            <button 
+              nz-button 
+              nzType="default" 
+              class="w-full"
+              style="background: transparent; border: 2px solid #2C3E50; color: #2C3E50; border-radius: 8px; font-weight: 600; padding: 10px 16px; height: auto;">
+              <i nz-icon nzType="login" class="mr-1"></i>
+              Log ind
+            </button>
+          </a>
+        </li>
+        <li class="px-4 py-3">
           <a routerLink="/tilmeld" (click)="closeMobileMenu()" class="block">
             <button 
               nz-button 
